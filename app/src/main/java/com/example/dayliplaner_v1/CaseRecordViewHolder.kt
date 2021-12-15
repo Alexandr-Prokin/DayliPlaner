@@ -9,5 +9,6 @@ class CaseRecordViewHolder(private val binding: ItemCaseRecordBinding): Recycler
         textViewDataStart.text = day.dateStart.toString()
         textViewDataFinish.text = day.dateFinish.toString()
         textViewNameCase.text = day.name
+        root.setOnClickListener{}
     }
 }
