@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
-
+apply from:'ktlint.gradle'
 android {
     compileSdk 31
 

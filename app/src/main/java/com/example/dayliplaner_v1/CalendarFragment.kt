@@ -18,23 +18,22 @@ class CalendarFragment : Fragment() {
     ): View {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
-
         val caseRecord = listOf(
-            CaseRecord (
+            CaseRecord(
                 id = 1,
                 dateStart = 2,
                 dateFinish = 3,
                 name = "Case one",
                 description = "Выполнить задание 1"
             ),
-            CaseRecord (
+            CaseRecord(
                 id = 2,
                 dateStart = 5,
                 dateFinish = 6,
                 name = "Case two",
                 description = "Выполнить задание 1"
             ),
-            CaseRecord (
+            CaseRecord(
                 id = 3,
                 dateStart = 7,
                 dateFinish = 9,
@@ -44,13 +43,10 @@ class CalendarFragment : Fragment() {
         )
         val adapter = CaseRecordAdapter()
         binding.recyclerViewCalendar.adapter = adapter
-        binding.calendarView.setOnDateChangeListener{ view , year, month, dayOfMonth ->
+        binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             adapter.submitList(caseRecord, dayOfMonth)
         }
 
-
         return binding.root
-
     }
-
 }
