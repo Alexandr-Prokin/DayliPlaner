@@ -1,6 +1,7 @@
 package com.example.dayliplaner_v1
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,11 @@ class CalendarFragment : Fragment() {
                 description = "Выполнить задание 1"
             ),
         )
-        val adapter = CaseRecordAdapter()
+        val adapter = CaseRecordAdapter(object : CardClickListener {
+            override fun onClicked(id: String) {
+                Log.d("testClick", "tag =" + id)
+            }
+        })
         binding.recyclerViewCalendar.adapter = adapter
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             adapter.submitList(caseRecord, dayOfMonth)

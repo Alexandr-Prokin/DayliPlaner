@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dayliplaner_v1.databinding.ItemCaseRecordBinding
 
-class CaseRecordAdapter : RecyclerView.Adapter<CaseRecordViewHolder>() {
+class CaseRecordAdapter(private val onClickListener: CardClickListener) : RecyclerView.Adapter<CaseRecordViewHolder>() {
 
     private var items = mutableListOf<CaseRecord>()
 
@@ -19,14 +19,17 @@ class CaseRecordAdapter : RecyclerView.Adapter<CaseRecordViewHolder>() {
 
     override fun onBindViewHolder(holder: CaseRecordViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.cardView.setOnClickListener {
+            onClickListener.onClicked(position.toString())
+        }
     }
 
     override fun getItemCount() = items.size
 
     fun submitList(caseRecord: List<CaseRecord>, day: Int) {
         items.clear()
-        val newItem = caseRecord.filter { it.dateStart == day }
-        items.addAll(newItem)
+        val newItemDay = caseRecord.filter { it.dateStart == day }
+        items.addAll(newItemDay)
         notifyDataSetChanged()
     }
 }
