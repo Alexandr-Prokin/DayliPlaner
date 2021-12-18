@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/calendarFragment">
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.dayliplaner_v1.CalendarFragment"
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/action_calendarFragment_to_caseDescriptionFragment"
+            app:destination="@+id/caseDescriptionFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/caseDescriptionFragment"
+        android:name="com.example.dayliplaner_v1.CaseDescriptionFragment"
+        android:label="CaseDescriptionFragment"
+        tools:layout="@layout/fragment_case_description">
+        <argument
+            android:name="id"
+            app:argType="long"/>
+        <action
+            android:id="@+id/action_caseDescriptionFragment_to_calendarFragment"
+            app:destination="@+id/calendarFragment"
+            app:popUpTo="@id/calendarFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

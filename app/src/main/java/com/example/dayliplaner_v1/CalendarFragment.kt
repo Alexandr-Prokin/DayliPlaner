@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.dayliplaner_v1.databinding.FragmentCalendarBinding
+import androidx.navigation.fragment.findNavController
 
 class CalendarFragment : Fragment() {
     lateinit var binding: FragmentCalendarBinding
@@ -43,7 +45,7 @@ class CalendarFragment : Fragment() {
             ),
         )
         val adapter = CaseRecordAdapter{ id ->
-
+            Toast.makeText(context, "$id", Toast.LENGTH_SHORT).show()
         }
         binding.recyclerViewCalendar.adapter = adapter
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
