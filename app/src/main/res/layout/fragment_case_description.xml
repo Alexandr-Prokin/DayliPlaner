@@ -5,7 +5,10 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
-
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:Text="back"/>
     <TextView
         android:id="@+id/caseDescriptionTextView"
         android:layout_width="match_parent"
