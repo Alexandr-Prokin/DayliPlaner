@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dayliplaner_v1.databinding.ItemCaseRecordBinding
 
-class CaseRecordAdapter(private val clickListener: (id: Int) -> Unit) : RecyclerView.Adapter<CaseRecordViewHolder>() {
+class CaseRecordAdapter(private val clickListener: (day: CaseRecord) -> Unit) : RecyclerView.Adapter<CaseRecordViewHolder>() {
 
     private var items = mutableListOf<CaseRecord>()
 

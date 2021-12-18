@@ -15,9 +15,8 @@ class CaseDescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCaseDescriptionBinding.inflate(inflater, container, false)
-        val id = CaseDescriptionFragmentArgs.fromBundle(requireArguments()).id
-        binding.caseDescriptionTextView.text = id.toString()
-
+        val name = CaseDescriptionFragmentArgs.fromBundle(requireArguments()).day
+        binding.nameTextView.text = name.toString()
         return binding.root
     }
 }

@@ -1,5 +1,8 @@
 package com.example.dayliplaner_v1
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CaseRecord(
     val id: Int,
     val dateStart: Int,

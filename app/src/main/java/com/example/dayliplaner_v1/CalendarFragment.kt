@@ -42,9 +42,10 @@ class CalendarFragment : Fragment() {
                 description = "Выполнить задание 1"
             ),
         )
-        val adapter = CaseRecordAdapter { id ->
+
+        val adapter = CaseRecordAdapter { day ->
             val action = CalendarFragmentDirections
-                .actionCalendarFragmentToCaseDescriptionFragment(id.toLong())
+                .actionCalendarFragmentToCaseDescriptionFragment(day)
             this.findNavController().navigate(action)
         }
         binding.recyclerViewCalendar.adapter = adapter
