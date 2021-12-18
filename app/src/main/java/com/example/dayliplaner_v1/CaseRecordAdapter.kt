@@ -18,10 +18,7 @@ class CaseRecordAdapter(private val clickListener: (id: Int) -> Unit) : Recycler
     }
 
     override fun onBindViewHolder(holder: CaseRecordViewHolder, position: Int) {
-        holder.bind(items[position],clickListener)
-//        holder.cardView.setOnClickListener {
-//            onClickListener.onClicked(position.toString(), clickListener)
-//        }
+        holder.bind(items[position], clickListener)
     }
 
     override fun getItemCount() = items.size
