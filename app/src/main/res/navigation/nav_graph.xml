@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_caseDescriptionFragment"
             app:destination="@+id/caseDescriptionFragment"/>
+        <argument
+            android:name="id"
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/caseDescriptionFragment"
@@ -20,8 +23,8 @@
         android:label="CaseDescriptionFragment"
         tools:layout="@layout/fragment_case_description">
         <argument
-            android:name="day"
-            app:argType="com.example.dayliplaner_v1.CaseRecord"/>
+            android:name="id"
+            app:argType="integer"/>
         <action
             android:id="@+id/action_caseDescriptionFragment_to_calendarFragment"
             app:destination="@+id/calendarFragment"

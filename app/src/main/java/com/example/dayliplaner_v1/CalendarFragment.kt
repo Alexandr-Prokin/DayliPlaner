@@ -43,11 +43,12 @@ class CalendarFragment : Fragment() {
             ),
         )
 
-        val adapter = CaseRecordAdapter { day ->
+        val adapter = CaseRecordAdapter { id ->
             val action = CalendarFragmentDirections
-                .actionCalendarFragmentToCaseDescriptionFragment(day)
+                .actionCalendarFragmentToCaseDescriptionFragment(id)
             this.findNavController().navigate(action)
         }
+
         binding.recyclerViewCalendar.adapter = adapter
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             adapter.submitList(caseRecord, dayOfMonth)

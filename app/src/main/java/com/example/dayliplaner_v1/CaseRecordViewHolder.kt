@@ -7,15 +7,13 @@ class CaseRecordViewHolder(private val binding: ItemCaseRecordBinding) : Recycle
 
     fun bind(
         day: CaseRecord,
-        clickListener: (
-            day: CaseRecord
-        ) -> Unit
+        clickListener: (id: Int) -> Unit
     ) = with(binding) {
         textViewDataStart.text = day.dateStart.toString()
         textViewDataFinish.text = day.dateFinish.toString()
         textViewNameCase.text = day.name
         root.setOnClickListener {
-            clickListener(CaseRecord(day.id, day.dateStart, day.dateFinish, day.name, day.description))
+            clickListener(day.id)
         }
     }
 }
