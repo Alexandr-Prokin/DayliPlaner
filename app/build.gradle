@@ -6,6 +6,8 @@ plugins {
 }
 apply from:'ktlint.gradle'
 apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 android {
     compileSdk 31
 
@@ -35,8 +37,11 @@ android {
     buildFeatures{
         viewBinding true
     }
-}
 
+}
+realm {
+    syncEnabled = true
+}
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
