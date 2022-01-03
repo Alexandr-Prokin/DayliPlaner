@@ -9,7 +9,7 @@ class RealmApp : Application() {
         super.onCreate()
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()
-            .name("Case.db")
+            .name("Case.realm")
             .deleteRealmIfMigrationNeeded()
             .schemaVersion(0)
             .build()

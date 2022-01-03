@@ -7,7 +7,7 @@
     tools:context=".AddCaseFragment">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+        android:id="@+id/NameInputEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -21,11 +21,12 @@
         android:id="@+id/descriptionAddTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:hint="Descriprion"
-        app:layout_constraintEnd_toEndOf="@+id/textInputEditText"
-        app:layout_constraintStart_toStartOf="@+id/textInputEditText"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText"
-        android:layout_margin="16dp"/>
+
+        app:layout_constraintEnd_toEndOf="@+id/NameInputEditText"
+        app:layout_constraintStart_toStartOf="@+id/NameInputEditText"
+        app:layout_constraintTop_toBottomOf="@+id/NameInputEditText" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/timeStartAddTextView"
