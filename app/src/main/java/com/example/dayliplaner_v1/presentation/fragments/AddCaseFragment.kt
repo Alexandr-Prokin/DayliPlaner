@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.dayliplaner_v1.CaseRecord
 import com.example.dayliplaner_v1.databinding.FragmentAddCaseBinding
 import io.realm.Realm
 import io.realm.exceptions.RealmException
-import io.realm.kotlin.where
 
 class AddCaseFragment : Fragment() {
     lateinit var binding: FragmentAddCaseBinding

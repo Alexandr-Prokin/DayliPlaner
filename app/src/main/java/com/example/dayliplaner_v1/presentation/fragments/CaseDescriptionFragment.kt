@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.dayliplaner_v1.CaseRecord
 import com.example.dayliplaner_v1.databinding.FragmentCaseDescriptionBinding
 
 class CaseDescriptionFragment : Fragment() {

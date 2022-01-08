@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.dayliplaner_v1.CalendarFragment"
+        android:name="com.example.dayliplaner_v1.presentation.fragments.CalendarFragment"
         android:label="CalendarFragment"
         tools:layout="@layout/fragment_calendar">
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/caseDescriptionFragment"
-        android:name="com.example.dayliplaner_v1.CaseDescriptionFragment"
+        android:name="com.example.dayliplaner_v1.presentation.fragments.CaseDescriptionFragment"
         android:label="CaseDescriptionFragment"
         tools:layout="@layout/fragment_case_description">
 
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/addCaseFragment"
-        android:name="com.example.dayliplaner_v1.AddCaseFragment"
+        android:name="com.example.dayliplaner_v1.presentation.fragments.AddCaseFragment"
         android:label="fragment_add_case"
         tools:layout="@layout/fragment_add_case" >
         <action

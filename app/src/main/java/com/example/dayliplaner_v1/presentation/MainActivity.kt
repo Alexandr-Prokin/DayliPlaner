@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

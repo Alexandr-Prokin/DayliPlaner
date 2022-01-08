@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.dayliplaner_v1.CaseRecord
+import com.example.dayliplaner_v1.CaseRecordAdapter
 import com.example.dayliplaner_v1.databinding.FragmentCalendarBinding
 import io.realm.Realm
 
@@ -22,8 +24,7 @@ class CalendarFragment : Fragment() {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
         val adapter = CaseRecordAdapter { id ->
-            val action = CalendarFragmentDirections
-                .actionCalendarFragmentToCaseDescriptionFragment()
+            val action = CalendarFragmentDirections.actionCalendarFragmentToCaseDescriptionFragment()
             this.findNavController().navigate(action)
         }
 
