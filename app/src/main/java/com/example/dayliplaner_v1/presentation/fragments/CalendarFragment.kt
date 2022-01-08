@@ -9,13 +9,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.dayliplaner_v1.CaseRecord
 import com.example.dayliplaner_v1.CaseRecordAdapter
 import com.example.dayliplaner_v1.databinding.FragmentCalendarBinding
+import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 import io.realm.Realm
 
 class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
-    lateinit var caseRecordAdapter: CaseRecordAdapter
     lateinit var realm: Realm
-    lateinit var caseList: ArrayList<CaseRecord>
+    private val convertDate = ConvertTimeStampUseCase()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

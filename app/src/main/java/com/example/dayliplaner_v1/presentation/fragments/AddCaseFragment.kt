@@ -14,7 +14,6 @@ import io.realm.exceptions.RealmException
 
 class AddCaseFragment : Fragment() {
     lateinit var binding: FragmentAddCaseBinding
-    private lateinit var caseRecord: ArrayList<CaseRecord>
     private lateinit var realm: Realm
 
     override fun onCreateView(
