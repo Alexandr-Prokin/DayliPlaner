@@ -24,4 +24,11 @@ class ConvertTimeStampUseCase {
         Log.e("Tag", "_timeStamp=$dayTimeStamp-$monthTimeStamp-$Year, $day-$month-$year")
         return "$dayTimeStamp-$monthTimeStamp-$Year" == "$day-$month-$year"
     }
+    fun getTime(timeStamp: String): String {
+
+        val dayTimeStamp = SimpleDateFormat("HH").format(timeStamp.toInt() * 1000L).toInt()
+
+        Log.e("Tag", "getTime=$dayTimeStamp")
+        return dayTimeStamp.toString()
+    }
 }

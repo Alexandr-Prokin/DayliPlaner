@@ -40,30 +40,34 @@ class AddCaseFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            realm.beginTransaction()
-            var count = 0
-            realm.where(CaseRecord::class.java).findAll().let {
-                for (i in it) {
-                    count++
+            if (dateTimeStart.day != 0) {
+                realm.beginTransaction()
+                var count = 0
+                realm.where(CaseRecord::class.java).findAll().let {
+                    for (i in it) {
+                        count++
+                    }
                 }
-            }
-            try {
-                var caseRecord = realm.createObject(CaseRecord::class.java)
-                dateTimeStart.hours = binding.timeStartAddTextView.text.toString()
-                dateTimeFinish.hours = binding.timeFinishAddTextView.text.toString()
-                caseRecord.setId(count + 1)
-                caseRecord.setName(binding.NameInputEditText.text.toString())
-                caseRecord.setDescription(binding.descriptionAddTextView.text.toString())
-                caseRecord.setDateStart(convertTime.setTimeStamp(dateTimeStart))
-                caseRecord.setDateFinish(convertTime.setTimeStamp(dateTimeFinish))
+                try {
+                    var caseRecord = realm.createObject(CaseRecord::class.java)
+                    dateTimeStart.hours = binding.timeHourStartAddSpinner.selectedItem.toString()
+                    dateTimeFinish.hours = binding.timeHourFinishAddSpinner.selectedItem.toString()
+                    caseRecord.setId(count + 1)
+                    caseRecord.setName(binding.NameInputEditText.text.toString())
+                    caseRecord.setDescription(binding.descriptionAddTextView.text.toString())
+                    caseRecord.setDateStart(convertTime.setTimeStamp(dateTimeStart))
+                    caseRecord.setDateFinish(convertTime.setTimeStamp(dateTimeFinish))
 
-                realm.commitTransaction()
-            } catch (e: RealmException) {
-                Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
+                    realm.commitTransaction()
+                } catch (e: RealmException) {
+                    Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
+                }
+                val action = AddCaseFragmentDirections
+                    .actionAddCaseFragmentToCalendarFragment()
+                this.findNavController().navigate(action)
+            } else {
+                Toast.makeText(activity, "Выберите дату", Toast.LENGTH_SHORT).show()
             }
-            val action = AddCaseFragmentDirections
-                .actionAddCaseFragmentToCalendarFragment()
-            this.findNavController().navigate(action)
         }
 
         return binding.root

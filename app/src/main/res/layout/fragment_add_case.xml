@@ -33,27 +33,46 @@
         app:layout_constraintStart_toStartOf="@+id/NameInputEditText"
         app:layout_constraintTop_toBottomOf="@+id/NameInputEditText" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/timeStartAddTextView"
-        android:layout_width="146dp"
-        android:layout_height="42dp"
-        android:layout_margin="16dp"
 
-        android:hint="13.00"
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Start time"
         app:layout_constraintStart_toStartOf="@+id/descriptionAddTextView"
         app:layout_constraintTop_toBottomOf="@+id/descriptionAddTextView" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/timeFinishAddTextView"
-        android:layout_width="146dp"
-        android:layout_height="42dp"
-        android:layout_margin="16dp"
+    <Spinner
+        android:id="@+id/timeHourStartAddSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:entries="@array/timeHours"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
-        android:hint="14.00"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="End time"
+        app:layout_constraintStart_toEndOf="@+id/timeHourStartAddSpinner"
+        app:layout_constraintTop_toTopOf="@+id/timeHourStartAddSpinner" />
+
+
+    <Spinner
+        android:id="@+id/timeHourFinishAddSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:entries="@array/timeHours"
         app:layout_constraintEnd_toEndOf="@+id/descriptionAddTextView"
-        app:layout_constraintStart_toEndOf="@+id/timeStartAddTextView"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionAddTextView" />
+
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <Button
         android:id="@+id/btnSave"
@@ -61,9 +80,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/timeFinishAddTextView"
-        app:layout_constraintStart_toStartOf="@+id/timeStartAddTextView"
-        app:layout_constraintTop_toBottomOf="@+id/timeFinishAddTextView" />
+        app:layout_constraintEnd_toEndOf="@+id/timeHourFinishAddSpinner"
+        app:layout_constraintStart_toStartOf="@+id/timeHourStartAddSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/timeHourFinishAddSpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
