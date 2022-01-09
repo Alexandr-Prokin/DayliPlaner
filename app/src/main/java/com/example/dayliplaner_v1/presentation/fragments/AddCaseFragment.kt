@@ -29,10 +29,6 @@ class AddCaseFragment : Fragment() {
         binding = FragmentAddCaseBinding.inflate(inflater, container, false)
         realm = Realm.getDefaultInstance()
         // val id = CaseDescriptionFragmentArgs.fromBundle(requireArguments()).id
-//        var timeStart = binding.timeStartAddTextView.text.toString()
-//        var timeFinish = binding.timeFinishAddTextView.text.toString()
-//        dateTimeStart.minute = "00"
-//        dateTimeFinish.minute = "00"
 
         binding.calendarAddView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             dateTimeStart.month = month + 1
@@ -53,8 +49,8 @@ class AddCaseFragment : Fragment() {
             }
             try {
                 var caseRecord = realm.createObject(CaseRecord::class.java)
-//                dateTimeStart.hours=timeStart
-//                dateTimeFinish.hours=timeFinish
+                dateTimeStart.hours = binding.timeStartAddTextView.text.toString()
+                dateTimeFinish.hours = binding.timeFinishAddTextView.text.toString()
                 caseRecord.setId(count + 1)
                 caseRecord.setName(binding.NameInputEditText.text.toString())
                 caseRecord.setDescription(binding.descriptionAddTextView.text.toString())
