@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dayliplaner_v1.databinding.ItemCaseRecordBinding
+import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 
 class CaseRecordAdapter(
     private val clickListener: (id: Int) -> Unit
 ) : RecyclerView.Adapter<CaseRecordViewHolder>() {
 
+    private val convertTime = ConvertTimeStampUseCase()
     private var items = mutableListOf<CaseRecord>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CaseRecordViewHolder {
@@ -28,16 +30,11 @@ class CaseRecordAdapter(
 
     override fun getItemCount() = items.size
 
-    fun submitList(caseRecord: List<CaseRecord>, day: Int) {
+    fun submitList(caseRecord: List<CaseRecord>,year : Int, month: Int, day: Int) {
         items.clear()
-        val newItemDay = caseRecord.filter { it.getId() == day }
+        val newItemDay = caseRecord.filter {
+            convertTime.getDayMonthYear(it.getDateStart(), year, month+1, day) }
         items.addAll(newItemDay)
         notifyDataSetChanged()
     }
-//    fun caseDescriptionList(caseRecord: List<CaseRecord>, id: Int) {
-//        items.clear()
-//        val newItemId = caseRecord.filter { it.id == id }
-//        items.addAll(newItemId)
-//        notifyDataSetChanged()
-//    }
 }

@@ -34,7 +34,7 @@ class CalendarFragment : Fragment() {
 
             realm = Realm.getDefaultInstance()
             realm.where(CaseRecord::class.java).findAll().let {
-                adapter.submitList(it, dayOfMonth)
+                adapter.submitList(it, year, month, dayOfMonth)
             }
         }
         binding.addButton.setOnClickListener {
