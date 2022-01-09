@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.AddCaseFragment">
 
+    <CalendarView
+        android:id="@+id/calendarAddView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/NameInputEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="150dp"
         android:hint="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarAddView" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/descriptionAddTextView"

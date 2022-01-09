@@ -1,3 +1,3 @@
 package com.example.dayliplaner_v1.domain.models
 
-class DateTime(val dd: Int, val MM: Int, val yyyy: Int, val hh: Int, val mm: Int)
+class DateTime(var day: Int, var month: Int, var year: Int, var hours: String, var minute: String)

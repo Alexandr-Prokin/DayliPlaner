@@ -30,10 +30,11 @@ class CaseRecordAdapter(
 
     override fun getItemCount() = items.size
 
-    fun submitList(caseRecord: List<CaseRecord>,year : Int, month: Int, day: Int) {
+    fun submitList(caseRecord: List<CaseRecord>, year: Int, month: Int, day: Int) {
         items.clear()
         val newItemDay = caseRecord.filter {
-            convertTime.getDayMonthYear(it.getDateStart(), year, month+1, day) }
+            convertTime.getDayMonthYear(it.getDateStart(), year, month + 1, day)
+        }
         items.addAll(newItemDay)
         notifyDataSetChanged()
     }
