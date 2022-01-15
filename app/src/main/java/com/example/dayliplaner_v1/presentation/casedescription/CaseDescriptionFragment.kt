@@ -1,7 +1,6 @@
 package com.example.dayliplaner_v1.presentation.casedescription
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +10,11 @@ import com.example.dayliplaner_v1.data.CaseRecord
 import com.example.dayliplaner_v1.databinding.FragmentCaseDescriptionBinding
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 import io.realm.Realm
+import kotlin.properties.Delegates
 
 class CaseDescriptionFragment : Fragment() {
     lateinit var binding: FragmentCaseDescriptionBinding
-    private var items = mutableListOf<CaseRecord>()
-    private val idCase = 8
+    private var idCase by Delegates.notNull<Int>()
     lateinit var realm: Realm
     private var convertTime = ConvertTimeStampUseCase()
 
@@ -25,6 +24,7 @@ class CaseDescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCaseDescriptionBinding.inflate(inflater, container, false)
+        idCase = arguments?.getString("id_case")?.toInt()!!
         realm = Realm.getDefaultInstance()
         realm.where(CaseRecord::class.java)
             .equalTo("id", idCase)

@@ -14,6 +14,7 @@
             android:id="@+id/action_calendarFragment_to_caseDescriptionFragment"
             app:destination="@+id/caseDescriptionFragment"/>
 
+
         <action
             android:id="@+id/action_calendarFragment_to_addCaseFragment"
             app:destination="@id/addCaseFragment" />
