@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.dayliplaner_v1.data.CaseRecord
-import com.example.dayliplaner_v1.presentation.caserecord.CaseRecordAdapter
 import com.example.dayliplaner_v1.databinding.FragmentCalendarBinding
-
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
+import com.example.dayliplaner_v1.presentation.caserecord.CaseRecordAdapter
 import io.realm.Realm
 
 class CalendarFragment : Fragment() {
@@ -26,7 +25,7 @@ class CalendarFragment : Fragment() {
 
         val adapter = CaseRecordAdapter { id ->
             val action =
-                 CalendarFragmentDirections.actionCalendarFragmentToCaseDescriptionFragment()
+                CalendarFragmentDirections.actionCalendarFragmentToCaseDescriptionFragment()
             this.findNavController().navigate(action)
         }
 
