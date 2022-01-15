@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.data
 
 import android.app.Application
 import io.realm.Realm

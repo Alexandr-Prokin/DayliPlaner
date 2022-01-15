@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.presentation.caserecord
 
 import androidx.lifecycle.ViewModel
 

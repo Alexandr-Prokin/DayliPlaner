@@ -1,6 +1,7 @@
-package com.example.dayliplaner_v1
+package com.example.dayliplaner_v1.presentation.caserecord
 
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dayliplaner_v1.data.CaseRecord
 import com.example.dayliplaner_v1.databinding.ItemCaseRecordBinding
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 

@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1.presentation.fragments
+package com.example.dayliplaner_v1.presentation.addcase
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.dayliplaner_v1.CaseRecord
+import com.example.dayliplaner_v1.data.CaseRecord
 import com.example.dayliplaner_v1.databinding.FragmentAddCaseBinding
 import com.example.dayliplaner_v1.domain.models.DateTime
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
@@ -62,8 +62,8 @@ class AddCaseFragment : Fragment() {
                 } catch (e: RealmException) {
                     Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
                 }
-                val action = AddCaseFragmentDirections
-                    .actionAddCaseFragmentToCalendarFragment()
+                val action =
+                    AddCaseFragmentDirections.actionAddCaseFragmentToCalendarFragment()
                 this.findNavController().navigate(action)
             } else {
                 Toast.makeText(activity, "Выберите дату", Toast.LENGTH_SHORT).show()
