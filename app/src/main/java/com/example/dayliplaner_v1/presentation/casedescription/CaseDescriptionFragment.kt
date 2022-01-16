@@ -5,18 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders.*
 import androidx.navigation.fragment.findNavController
-import com.example.dayliplaner_v1.data.CaseRecord
 import com.example.dayliplaner_v1.databinding.FragmentCaseDescriptionBinding
-import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 import io.realm.Realm
-import kotlin.properties.Delegates
 
 class CaseDescriptionFragment : Fragment() {
-    lateinit var binding: FragmentCaseDescriptionBinding
-    private var idCase by Delegates.notNull<Int>()
+    private lateinit var binding: FragmentCaseDescriptionBinding
+
     lateinit var realm: Realm
-    private var convertTime = ConvertTimeStampUseCase()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,13 +21,11 @@ class CaseDescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCaseDescriptionBinding.inflate(inflater, container, false)
-        idCase = arguments?.getString("id_case")?.toInt()!!
-        realm = Realm.getDefaultInstance()
-        realm.where(CaseRecord::class.java)
-            .equalTo("id", idCase)
-            .findAll().let {
-                viewGetDB(it)
-            }
+        val viewModel = of(this)[CaseDescriptionViewModel::class.java]
+        val _id = arguments?.getString("id_case")?.toInt()!!
+
+        binding.viewmodel = viewModel
+        viewModel.getList(_id)
         binding.materialButton.setOnClickListener {
 
             val action = CaseDescriptionFragmentDirections
@@ -39,17 +34,5 @@ class CaseDescriptionFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    private fun viewGetDB(caseRecord: List<CaseRecord>) {
-        lateinit var timeStart: String
-        lateinit var timeFinish: String
-        for (i in caseRecord) {
-            timeStart = convertTime.getTime(i.getDateStart())
-            timeFinish = convertTime.getTime(i.getDateFinish())
-            binding.nameTextView.text = i.getName()
-            binding.descriptionTextView.text = i.getDescription()
-            binding.timeTextView.text = "$timeStart-$timeFinish"
-        }
     }
 }
