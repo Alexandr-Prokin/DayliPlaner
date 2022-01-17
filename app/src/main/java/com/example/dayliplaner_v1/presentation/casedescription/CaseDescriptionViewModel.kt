@@ -8,10 +8,12 @@ import io.realm.Realm
 import kotlin.properties.Delegates
 
 class CaseDescriptionViewModel : ViewModel() {
+    // в один объект
     var name: String? = null
     var description: String? = null
     var time: String? = null
     var id by Delegates.notNull<Int>()
+    //
     var realm: Realm = Realm.getDefaultInstance()
     private var convertTime = ConvertTimeStampUseCase()
 
@@ -20,21 +22,18 @@ class CaseDescriptionViewModel : ViewModel() {
     fun getList(id: Int) {
         realm.where(CaseRecord::class.java)
             .equalTo("id", id)
-            .findAll().let {
+            .findFirst()?.let {
                 viewGetDB(it)
             }
         Log.e("Tag", "viewID$id")
     }
-    private fun viewGetDB(caseRecord: List<CaseRecord>) {
-        lateinit var timeStart: String
-        lateinit var timeFinish: String
-        for (i in caseRecord) {
-            timeStart = convertTime.getTime(i.getDateStart())
-            timeFinish = convertTime.getTime(i.getDateFinish())
-            name = i.getName()
-            description = i.getDescription()
-            time = "$timeStart-$timeFinish"
-        }
+    private fun viewGetDB(caseRecord: CaseRecord) {
+
+        var timeStart: String = convertTime.getTime(caseRecord.getDateStart())
+        var timeFinish: String = convertTime.getTime(caseRecord.getDateFinish())
+        name = caseRecord.getName()
+        description = caseRecord.getDescription()
+        time = "$timeStart-$timeFinish"
     }
 
     fun setClickButton() {

@@ -11,8 +11,8 @@ import com.example.dayliplaner_v1.databinding.FragmentCaseDescriptionBinding
 import io.realm.Realm
 
 class CaseDescriptionFragment : Fragment() {
-    private lateinit var binding: FragmentCaseDescriptionBinding
 
+    private lateinit var binding: FragmentCaseDescriptionBinding
     lateinit var realm: Realm
 
     override fun onCreateView(
@@ -27,12 +27,13 @@ class CaseDescriptionFragment : Fragment() {
         binding.viewmodel = viewModel
         viewModel.getList(_id)
         binding.materialButton.setOnClickListener {
-
-            val action = CaseDescriptionFragmentDirections
-                .actionCaseDescriptionFragmentToCalendarFragment()
-            this.findNavController().navigate(action)
+            this.findNavController().popBackStack()
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

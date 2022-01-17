@@ -62,9 +62,7 @@ class AddCaseFragment : Fragment() {
                 } catch (e: RealmException) {
                     Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
                 }
-                val action =
-                    AddCaseFragmentDirections.actionAddCaseFragmentToCalendarFragment()
-                this.findNavController().navigate(action)
+                this.findNavController().popBackStack()
             } else {
                 Toast.makeText(activity, "Выберите дату", Toast.LENGTH_SHORT).show()
             }

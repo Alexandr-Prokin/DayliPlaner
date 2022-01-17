@@ -13,34 +13,22 @@
         <action
             android:id="@+id/action_calendarFragment_to_caseDescriptionFragment"
             app:destination="@+id/caseDescriptionFragment"/>
-
-
         <action
             android:id="@+id/action_calendarFragment_to_addCaseFragment"
-            app:destination="@id/addCaseFragment" />
-
-
-
+            app:destination="@id/addCaseFragment"/>
     </fragment>
+
     <fragment
         android:id="@+id/caseDescriptionFragment"
         android:name="com.example.dayliplaner_v1.presentation.casedescription.CaseDescriptionFragment"
         android:label="CaseDescriptionFragment"
         tools:layout="@layout/fragment_case_description">
-
-        <action
-            android:id="@+id/action_caseDescriptionFragment_to_calendarFragment"
-            app:destination="@+id/calendarFragment"
-            app:popUpTo="@id/calendarFragment"
-            app:popUpToInclusive="true"/>
     </fragment>
+
     <fragment
         android:id="@+id/addCaseFragment"
         android:name="com.example.dayliplaner_v1.presentation.addcase.AddCaseFragment"
         android:label="fragment_add_case"
-        tools:layout="@layout/fragment_add_case" >
-        <action
-            android:id="@+id/action_addCaseFragment_to_calendarFragment"
-            app:destination="@id/calendarFragment" />
+        tools:layout="@layout/fragment_add_case">
     </fragment>
 </navigation>
