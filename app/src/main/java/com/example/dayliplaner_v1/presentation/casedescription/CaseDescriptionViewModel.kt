@@ -17,8 +17,6 @@ class CaseDescriptionViewModel : ViewModel() {
     var realm: Realm = Realm.getDefaultInstance()
     private var convertTime = ConvertTimeStampUseCase()
 
-    init {
-    }
     fun getList(id: Int) {
         realm.where(CaseRecord::class.java)
             .equalTo("id", id)

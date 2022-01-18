@@ -4,21 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.dayliplaner_v1.data.CaseRecord
+import androidx.lifecycle.ViewModelProviders
 import com.example.dayliplaner_v1.databinding.FragmentAddCaseBinding
-import com.example.dayliplaner_v1.domain.models.DateTime
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 import io.realm.Realm
-import io.realm.exceptions.RealmException
 
 class AddCaseFragment : Fragment() {
     lateinit var binding: FragmentAddCaseBinding
     private lateinit var realm: Realm
-    private var dateTimeStart: DateTime = DateTime(0, 0, 0, "00", "00")
-    private var dateTimeFinish: DateTime = DateTime(0, 0, 0, "00", "00")
+//    private var dateTimeStart: DateTime = DateTime(0, 0, 0, 0, "00")
+//    private var dateTimeFinish: DateTime = DateTime(0, 0, 0, 0, "00")
     private val convertTime = ConvertTimeStampUseCase()
 
     override fun onCreateView(
@@ -27,45 +23,18 @@ class AddCaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddCaseBinding.inflate(inflater, container, false)
+        val viewModel = ViewModelProviders.of(this)[AddCaseViewModel::class.java]
+        binding.viewmodel = viewModel
         realm = Realm.getDefaultInstance()
-        // val id = CaseDescriptionFragmentArgs.fromBundle(requireArguments()).id
 
         binding.calendarAddView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            dateTimeStart.month = month + 1
-            dateTimeStart.year = year
-            dateTimeStart.day = dayOfMonth
-            dateTimeFinish.month = month + 1
-            dateTimeFinish.year = year
-            dateTimeFinish.day = dayOfMonth
+            viewModel.setDay(year, month + 1, dayOfMonth)
         }
 
         binding.btnSave.setOnClickListener {
-            if (dateTimeStart.day != 0) {
-                realm.beginTransaction()
-                var count = 0
-                realm.where(CaseRecord::class.java).findAll().let {
-                    for (i in it) {
-                        count++
-                    }
-                }
-                try {
-                    var caseRecord = realm.createObject(CaseRecord::class.java)
-                    dateTimeStart.hours = binding.timeHourStartAddSpinner.selectedItem.toString()
-                    dateTimeFinish.hours = binding.timeHourFinishAddSpinner.selectedItem.toString()
-                    caseRecord.setId(count + 1)
-                    caseRecord.setName(binding.NameInputEditText.text.toString())
-                    caseRecord.setDescription(binding.descriptionAddTextView.text.toString())
-                    caseRecord.setDateStart(convertTime.setTimeStamp(dateTimeStart))
-                    caseRecord.setDateFinish(convertTime.setTimeStamp(dateTimeFinish))
-
-                    realm.commitTransaction()
-                } catch (e: RealmException) {
-                    Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
-                }
-                this.findNavController().popBackStack()
-            } else {
-                Toast.makeText(activity, "Выберите дату", Toast.LENGTH_SHORT).show()
-            }
+            viewModel.saveCase()
+            // тосты ошибок
+            // backStack
         }
 
         return binding.root
