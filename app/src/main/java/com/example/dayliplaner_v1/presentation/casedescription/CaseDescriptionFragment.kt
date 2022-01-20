@@ -8,12 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders.*
 import androidx.navigation.fragment.findNavController
 import com.example.dayliplaner_v1.databinding.FragmentCaseDescriptionBinding
-import io.realm.Realm
 
 class CaseDescriptionFragment : Fragment() {
 
     private lateinit var binding: FragmentCaseDescriptionBinding
-    lateinit var realm: Realm
 
     override fun onCreateView(
         inflater: LayoutInflater,
