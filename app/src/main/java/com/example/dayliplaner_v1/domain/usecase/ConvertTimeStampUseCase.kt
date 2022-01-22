@@ -20,9 +20,9 @@ class ConvertTimeStampUseCase {
 
         val dayTimeStamp = SimpleDateFormat("dd").format(timeStamp.toInt() * 1000L).toInt()
         val monthTimeStamp = SimpleDateFormat("MM").format(timeStamp.toInt() * 1000L).toInt()
-        val Year = SimpleDateFormat("yyyy").format(timeStamp.toInt() * 1000L).toInt()
-        Log.e("Tag", "_timeStamp=$dayTimeStamp-$monthTimeStamp-$Year, $day-$month-$year")
-        return "$dayTimeStamp-$monthTimeStamp-$Year" == "$day-$month-$year"
+        val year = SimpleDateFormat("yyyy").format(timeStamp.toInt() * 1000L).toInt()
+        Log.e("Tag", "_timeStamp=$dayTimeStamp-$monthTimeStamp-$year, $day-$month-$year")
+        return "$dayTimeStamp-$monthTimeStamp-$year" == "$day-$month-$year"
     }
     fun getTime(timeStamp: String): String {
 

@@ -23,7 +23,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/NameInputEditText"
-            android:text="@={viewmodel.name}"
+            android:text="@={viewmodel.caseRecordModel.name}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@={viewmodel.description}"
+            android:text="@={viewmodel.caseRecordModel.description}"
             android:hint="@string/descriprion"
             app:layout_constraintEnd_toEndOf="@+id/calendarAddView"
             app:layout_constraintStart_toStartOf="@+id/calendarAddView"
@@ -60,7 +60,7 @@
             android:layout_marginHorizontal="8dp"
             android:entries="@array/timeHours"
 
-            android:selectedItemPosition="@={viewmodel.dateTimeStart.hours}"
+            android:selectedItemPosition="@={viewmodel.caseRecordModel.dateStart.hours}"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/textView" />
 
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:entries="@array/timeHours"
-            android:selectedItemPosition="@={viewmodel.dateTimeFinish.hours}"
+            android:selectedItemPosition="@={viewmodel.caseRecordModel.dateFinish.hours}"
             app:layout_constraintEnd_toEndOf="@+id/descriptionAddTextView"
             app:layout_constraintHorizontal_bias="0.134"
             app:layout_constraintStart_toEndOf="@+id/textView2"

@@ -2,7 +2,7 @@ package com.example.dayliplaner_v1.presentation.casedescription
 
 import androidx.lifecycle.ViewModel
 import com.example.dayliplaner_v1.data.CaseRecord
-import com.example.dayliplaner_v1.data.DataApp
+import com.example.dayliplaner_v1.data.repository.AppRepositoryImp
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 import io.realm.Realm
 import kotlin.properties.Delegates
@@ -14,12 +14,12 @@ class CaseDescriptionViewModel : ViewModel() {
     var time: String? = null
     var id by Delegates.notNull<Int>()
     //
-    val dataApp: DataApp = DataApp()
+    val appRepositoryImp: AppRepositoryImp = AppRepositoryImp()
     var realm: Realm = Realm.getDefaultInstance()
     private var convertTime = ConvertTimeStampUseCase()
 
     fun getList(id: Int) {
-        viewGetDB(dataApp.getOne(id))
+        viewGetDB(appRepositoryImp.getOne(id))
     }
     private fun viewGetDB(caseRecord: CaseRecord?) {
 
