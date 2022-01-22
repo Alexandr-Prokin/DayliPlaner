@@ -3,7 +3,7 @@ package com.example.dayliplaner_v1.presentation.caserecord
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dayliplaner_v1.data.CaseRecord
+import com.example.dayliplaner_v1.data.models.CaseRecord
 import com.example.dayliplaner_v1.databinding.ItemCaseRecordBinding
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
 

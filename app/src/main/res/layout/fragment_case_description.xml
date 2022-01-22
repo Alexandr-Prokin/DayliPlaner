@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text="@={viewmodel.name}"
+            android:text="@={viewmodel.caseDescription.name}"
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             tools:text="Name" />
 
     <TextView
-        android:text="@={viewmodel.time}"
+        android:text="@={viewmodel.caseDescription.time}"
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         tools:text="13.00-14.00"/>
 
         <TextView
-            android:text="@={viewmodel.description}"
+            android:text="@={viewmodel.caseDescription.description}"
             android:id="@+id/descriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

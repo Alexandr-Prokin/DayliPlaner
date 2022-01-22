@@ -1,4 +1,4 @@
-package com.example.dayliplaner_v1.data
+package com.example.dayliplaner_v1.data.models
 
 import io.realm.RealmObject
 

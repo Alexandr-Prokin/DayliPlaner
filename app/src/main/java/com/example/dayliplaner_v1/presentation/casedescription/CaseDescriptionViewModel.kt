@@ -1,32 +1,28 @@
 package com.example.dayliplaner_v1.presentation.casedescription
 
 import androidx.lifecycle.ViewModel
-import com.example.dayliplaner_v1.data.CaseRecord
+import com.example.dayliplaner_v1.data.models.CaseRecord
 import com.example.dayliplaner_v1.data.repository.AppRepositoryImp
+import com.example.dayliplaner_v1.domain.models.CaseDescription
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase
-import io.realm.Realm
-import kotlin.properties.Delegates
+import com.example.dayliplaner_v1.domain.usecase.GetListUseCase
 
 class CaseDescriptionViewModel : ViewModel() {
-    // в один объект
-    var name: String? = null
-    var description: String? = null
-    var time: String? = null
-    var id by Delegates.notNull<Int>()
-    //
-    val appRepositoryImp: AppRepositoryImp = AppRepositoryImp()
-    var realm: Realm = Realm.getDefaultInstance()
+
+    var caseDescription = CaseDescription(null, null, null)
+    private val appRepository = AppRepositoryImp()
+    private val getListUseCase = GetListUseCase(appRepository)
     private var convertTime = ConvertTimeStampUseCase()
 
     fun getList(id: Int) {
-        viewGetDB(appRepositoryImp.getOne(id))
+        viewGetDB(getListUseCase.getList(id))
     }
     private fun viewGetDB(caseRecord: CaseRecord?) {
 
-        var timeStart: String = convertTime.getTime(caseRecord!!.getDateStart())
-        var timeFinish: String = convertTime.getTime(caseRecord.getDateFinish())
-        name = caseRecord.getName()
-        description = caseRecord.getDescription()
-        time = "$timeStart-$timeFinish"
+        val timeStart: String = convertTime.getTime(caseRecord!!.getDateStart())
+        val timeFinish: String = convertTime.getTime(caseRecord.getDateFinish())
+        caseDescription.name = caseRecord.getName()
+        caseDescription.description = caseRecord.getDescription()
+        caseDescription.time = "$timeStart-$timeFinish"
     }
 }

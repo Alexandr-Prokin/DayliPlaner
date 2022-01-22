@@ -1,6 +1,6 @@
 package com.example.dayliplaner_v1.data.repository
 
-import com.example.dayliplaner_v1.data.CaseRecord
+import com.example.dayliplaner_v1.data.models.CaseRecord
 import com.example.dayliplaner_v1.domain.models.CaseRecordModel
 import com.example.dayliplaner_v1.domain.repository.AppRepository
 import com.example.dayliplaner_v1.domain.usecase.ConvertTimeStampUseCase

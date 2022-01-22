@@ -20,10 +20,10 @@ class CaseDescriptionFragment : Fragment() {
     ): View {
         binding = FragmentCaseDescriptionBinding.inflate(inflater, container, false)
         val viewModel = of(this)[CaseDescriptionViewModel::class.java]
-        val _id = arguments?.getString("id_case")?.toInt()!!
+        val id = arguments?.getString("id_case")?.toInt()!!
 
         binding.viewmodel = viewModel
-        viewModel.getList(_id)
+        viewModel.getList(id)
         binding.materialButton.setOnClickListener {
             this.findNavController().popBackStack()
         }
