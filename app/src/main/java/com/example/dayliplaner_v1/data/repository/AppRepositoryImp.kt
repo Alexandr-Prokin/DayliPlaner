@@ -10,6 +10,7 @@ import io.realm.exceptions.RealmException
 
 class AppRepositoryImp() : AppRepository {
     private var convertTime = ConvertTimeStampUseCase()
+
     private var realm: Realm = Realm.getDefaultInstance()
     override fun getData(): RealmResults<CaseRecord> {
 
