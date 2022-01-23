@@ -11,8 +11,8 @@ class AddCaseViewModel : ViewModel() {
     private val saveCaseUseCase = SaveCaseUseCase(appRepository)
 
     val caseRecordModel: CaseRecordModel = CaseRecordModel(
-        DateTime(null, null, null, null, 0),
-        DateTime(null, null, null, null, 0),
+        DateTime(null, null, null, 11, 0),
+        DateTime(null, null, null, 13, 0),
         "",
         ""
     )

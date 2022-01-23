@@ -35,8 +35,7 @@ class CalendarFragment : Fragment() {
         }
         binding.addButton.setOnClickListener {
 
-           // this.findNavController().navigate(R.id.action_calendarFragment_to_addCaseFragment, bundle)
-            this.findNavController().navigate(R.id.action_calendarFragment_to_addCaseScreen , bundle)
+            this.findNavController().navigate(R.id.action_calendarFragment_to_addCaseScreen, bundle)
         }
         return binding.root
     }
