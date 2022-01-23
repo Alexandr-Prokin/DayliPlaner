@@ -9,8 +9,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DayliPlaner_v1"
-         >
+        android:theme="@style/Theme.DayliPlaner_v1">
+        <activity
+            android:name=".presentation.addcase.AddCaseScreen"
+            android:exported="false"
+            android:label="@string/title_add_case_screen"
+            android:theme="@style/Theme.DayliPlaner_v1.NoActionBar" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
