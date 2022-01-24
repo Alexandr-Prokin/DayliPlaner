@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,13 +87,13 @@ fun AppTextField(
     value: String,
     onValueChange: (String) -> Unit,
 ) {
-//    OutlinedTextField(
-//        value = value, onValueChange = onValueChange,
-//        modifier = Modifier
-//
-//            .border(1.dp, Color.Black)
-//            .background(Color.LightGray)
-//            .size(50.dp, 50.dp),)
+    OutlinedTextField(
+        value = value, onValueChange = onValueChange,
+        modifier = Modifier
+            .border(1.dp, Color.Black)
+            .background(Color.LightGray)
+            .size(50.dp, 50.dp),
+    )
 }
 
 @Composable
@@ -133,6 +136,7 @@ fun PickerMinets() {
 }
 @Composable
 fun TimePicker() {
+
     Row() {
         PickerHours()
         PickerMinets()
@@ -162,5 +166,26 @@ fun OneTime(
 @Composable
 @Preview(showSystemUi = true, name = "MyTime")
 fun ShowMe() {
-    TwoTimePicker()
+    var visible by remember { mutableStateOf(false) }
+    var textValue = remember { mutableStateOf(" ") }
+    //
+    val localFocusManager = LocalFocusManager.current
+
+    Column() {
+        TextField(
+            value = "",
+            onValueChange = { textValue.value = it },
+            modifier = Modifier.onFocusChanged { focusState ->
+                if (visible != focusState.isFocused) {
+                    visible = true
+                }
+                if (!focusState.isFocused) {
+                    visible = false
+                }
+            },
+        )
+        if (visible) {
+            TimePicker()
+        }
+    }
 }
