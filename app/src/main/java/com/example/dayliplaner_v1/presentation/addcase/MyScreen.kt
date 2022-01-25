@@ -19,7 +19,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 class MyScreen()
 
 @Composable
-fun PickerStartTime() {
+fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
 
     var startHour by remember { mutableStateOf(0) }
     var startMinute by remember { mutableStateOf(0) }
@@ -79,7 +79,7 @@ fun PickerStartTime() {
 }
 
 @Composable
-fun PickerFinishTime() {
+fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
 
     var finishHour by remember { mutableStateOf(0) }
     var finishMinute by remember { mutableStateOf(0) }
