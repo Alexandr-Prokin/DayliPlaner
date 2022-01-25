@@ -11,12 +11,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -26,7 +25,7 @@ import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
 var addCaseViewModel = AddCaseViewModel()
 
 class AddCaseScreen : ComponentActivity() {
-    var addCaseViewModel = AddCaseViewModel()
+    // var addCaseViewModel = AddCaseViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         // val viewModel = ViewModelProviders.of(this)[AddCaseViewModel::class.java]
         super.onCreate(savedInstanceState)
@@ -56,12 +55,11 @@ fun MyCalendarView() {
 @Composable
 fun MainScreen(addCaseViewModel: AddCaseViewModel) {
     val navController = rememberNavController()
-    val name = remember { mutableStateOf("") }
-    val description = remember { mutableStateOf("") }
+    var name = remember { mutableStateOf("") }
+    var description = remember { mutableStateOf("") }
 
     addCaseViewModel.caseRecordModel.name = name.value
     addCaseViewModel.caseRecordModel.description = description.value
-    // addCaseViewModel.caseRecordModel.dateStart.hours = remember{ mutableStateOf("") }
 
     val time = remember { mutableStateOf("") }
 
@@ -100,16 +98,20 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
             error = "Is not empty"
         )
         Row {
-            PickerTime()
+            // start time
+            PickerStartTime()
             Spacer(modifier = Modifier.size(10.dp))
-            PickerTime()
+            // end time
+            PickerFinishTime()
         }
         Spacer(modifier = Modifier.size(10.dp))
         Button(
 
             onClick = {
-                addCaseViewModel.saveCase()
-                navController.navigate("calendarFragment")
+
+                if (addCaseViewModel.saveCase()) {
+                    navController.navigate("calendarFragment")
+                }
             }
 
         ) {
@@ -152,9 +154,9 @@ fun AppTextFild(
 }
 
 //
-// @Preview(showSystemUi = true, name = "AddCaseScreen")
-// @Composable
-// fun DefaultPreview() {
-//
-//    MainScreen(addCaseViewModel)
-// }
+@Preview(showSystemUi = true, name = "AddCaseScreen")
+@Composable
+fun DefaultPreview() {
+
+    MainScreen(addCaseViewModel)
+}

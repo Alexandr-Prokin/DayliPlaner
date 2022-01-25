@@ -11,8 +11,8 @@ class AddCaseViewModel : ViewModel() {
     private val saveCaseUseCase = SaveCaseUseCase(appRepository)
 
     val caseRecordModel: CaseRecordModel = CaseRecordModel(
-        DateTime(null, null, null, 11, 0),
-        DateTime(null, null, null, 13, 0),
+        DateTime(null, null, null, null, null),
+        DateTime(null, null, null, null, null),
         "",
         ""
     )
@@ -27,7 +27,9 @@ class AddCaseViewModel : ViewModel() {
     }
 
     fun saveCase(): Boolean {
-        return if (caseRecordModel.dateStart.day != null) {
+        return if (caseRecordModel.dateStart.day != null &&
+            caseRecordModel.dateStart.hours != null
+        ) {
             saveCaseUseCase.execute(caseRecordModel)
         } else {
             false
