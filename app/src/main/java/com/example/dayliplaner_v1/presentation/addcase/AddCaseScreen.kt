@@ -99,7 +99,12 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
             placeHolder = "Enter description",
             error = "Is not empty"
         )
-        TwoTimePicker()
+        Row {
+            PickerTime()
+            Spacer(modifier = Modifier.size(10.dp))
+            PickerTime()
+        }
+        Spacer(modifier = Modifier.size(10.dp))
         Button(
 
             onClick = {
