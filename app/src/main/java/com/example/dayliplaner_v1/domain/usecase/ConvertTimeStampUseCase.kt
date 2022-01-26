@@ -26,9 +26,10 @@ class ConvertTimeStampUseCase {
     }
     fun getTime(timeStamp: String): String {
 
-        val dayTimeStamp = SimpleDateFormat("HH").format(timeStamp.toInt() * 1000L).toInt()
+        val dayTimeHoursStamp = SimpleDateFormat("HH").format(timeStamp.toInt() * 1000L).toString()
+        val dayTimeMinutesStamp = SimpleDateFormat("mm").format(timeStamp.toInt() * 1000L).toString()
 
-        Log.e("Tag", "getTime=$dayTimeStamp")
-        return dayTimeStamp.toString()
+        Log.e("Tag", "getTime=$dayTimeHoursStamp:$dayTimeMinutesStamp")
+        return "$dayTimeHoursStamp:$dayTimeMinutesStamp"
     }
 }

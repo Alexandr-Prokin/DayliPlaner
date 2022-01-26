@@ -21,7 +21,6 @@ class CalendarFragment : Fragment() {
     ): View {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
         val viewModel = ViewModelProviders.of(this)[CalendarViewModel::class.java]
-
         val adapter = CaseRecordAdapter { id ->
             bundle.putString("id_case", id.toString())
             this.findNavController().navigate(R.id.caseDescriptionFragment, bundle)

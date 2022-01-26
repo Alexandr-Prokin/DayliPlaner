@@ -10,9 +10,7 @@
             />
     </data>
 
-    <LinearLayout
-
-
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -29,31 +27,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text="@={viewmodel.caseDescription.name}"
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="@={viewmodel.caseDescription.name}"
+            app:layout_constraintStart_toStartOf="@+id/materialButton"
+            app:layout_constraintTop_toBottomOf="@+id/materialButton"
             tools:text="Name" />
 
-    <TextView
-        android:text="@={viewmodel.caseDescription.time}"
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        tools:text="13.00-14.00"/>
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@={viewmodel.caseDescription.time}"
+            app:layout_constraintStart_toStartOf="@+id/nameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+            tools:text="13.00-14.00" />
 
         <TextView
-            android:text="@={viewmodel.caseDescription.description}"
             android:id="@+id/descriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
+            android:text="@={viewmodel.caseDescription.description}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/timeTextView"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView"
             tools:text="В двери! Новый год стучится,Дед Мороз к нам в гости мчится,
@@ -62,6 +63,6 @@
         Скоро сказка в дом войдет, Скоро будет Новый год" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
