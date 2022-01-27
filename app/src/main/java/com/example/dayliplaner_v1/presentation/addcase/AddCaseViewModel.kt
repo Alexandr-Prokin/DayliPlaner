@@ -9,6 +9,9 @@ import com.example.dayliplaner_v1.domain.usecase.SaveCaseUseCase
 class AddCaseViewModel : ViewModel() {
     private val appRepository = AppRepositoryImp()
     private val saveCaseUseCase = SaveCaseUseCase(appRepository)
+    var errorDay = false
+    var errorName = false
+    var errorDescription = false
     var errorNameText = ""
     var errorDescriptionText = ""
     private val errorText = "Is not empty"
@@ -29,24 +32,24 @@ class AddCaseViewModel : ViewModel() {
     }
 
     fun saveCase(): Boolean {
-        return when {
-            caseRecordModel.dateStart.day == null -> {
-                false
+        return if (caseRecordModel.dateStart.day == null &&
+            caseRecordModel.name == null &&
+            caseRecordModel.description == null
+        ) {
+            saveCaseUseCase.execute(caseRecordModel)
+        } else {
+            errorDay = caseRecordModel.dateStart.day == null
+            errorNameText = if (caseRecordModel.name == null) {
+                errorText
+            } else {
+                ""
             }
-            caseRecordModel.dateStart.hours == null -> {
-                false
+            errorDescriptionText = if (caseRecordModel.description == null) {
+                errorText
+            } else {
+                ""
             }
-            caseRecordModel.name != null -> {
-                errorNameText = errorText
-                false
-            }
-            caseRecordModel.description != null -> {
-                errorDescriptionText = errorText
-                false
-            }
-            else -> {
-                saveCaseUseCase.execute(caseRecordModel)
-            }
+            false
         }
     }
 }

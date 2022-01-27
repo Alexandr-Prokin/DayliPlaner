@@ -1,7 +1,9 @@
 package com.example.dayliplaner_v1.presentation.addcase
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.CalendarView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
@@ -28,7 +30,7 @@ class AddCaseScreen : ComponentActivity() {
             DayliPlaner_v1Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    MainScreen(addCaseViewModel)
+                    MainScreen(addCaseViewModel, this)
                 }
             }
         }
@@ -47,12 +49,13 @@ fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
     )
 }
 @Composable
-fun MainScreen(addCaseViewModel: AddCaseViewModel) {
+fun MainScreen(addCaseViewModel: AddCaseViewModel, context: Context) {
     val navController = rememberNavController()
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
-    val errorName = remember { mutableStateOf("${addCaseViewModel.errorNameText}") }
-    val errorDescription = remember { mutableStateOf("${addCaseViewModel.errorDescriptionText}") }
+    val errorName = remember { mutableStateOf("") }
+    val errorDescription = remember { mutableStateOf("") }
+
     addCaseViewModel.caseRecordModel.name = name.value
     addCaseViewModel.caseRecordModel.description = description.value
 
@@ -103,15 +106,22 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
         Spacer(modifier = Modifier.size(10.dp))
         Button(
             onClick = {
-                if (!addCaseViewModel.saveCase()) {
-                    if (name.value.isEmpty()) {
-                        errorName.value = "Is not empty"
-                    }
-                    if (name.value.isEmpty()) {
-                        errorDescription.value = "Is not empty"
-                    }
-                } else {
+                if (addCaseViewModel.saveCase()) {
                     navController.navigate("calendarFragment")
+                } else {
+                    if (addCaseViewModel.errorDay) {
+                        Toast.makeText(context, "select a date", Toast.LENGTH_SHORT).show()
+                    }
+                    if (name.value.isEmpty()) {
+                        errorName.value = "is not empty"
+                    } else {
+                        errorName.value = ""
+                    }
+                    if (description.value.isEmpty()) {
+                        errorDescription.value = "is not empty"
+                    } else {
+                        errorDescription.value = ""
+                    }
                 }
             }
 
@@ -159,5 +169,6 @@ fun AppTextField(
 @Composable
 fun DefaultPreview() {
     val addCaseViewModel = AddCaseViewModel()
-    MainScreen(addCaseViewModel)
+
+    // MainScreen(addCaseViewModel, context = Context)
 }
