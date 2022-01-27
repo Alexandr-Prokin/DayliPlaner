@@ -36,7 +36,7 @@ class CaseRecordAdapter(
         val newItemDay = caseRecord.filter {
             convertTime.getDayMonthYear(it.getDateStart(), year, month + 1, day)
         }
-        items.addAll(newItemDay)
+        items.addAll(newItemDay.sortedBy { it.getDateStart() })
         notifyDataSetChanged()
     }
 }
