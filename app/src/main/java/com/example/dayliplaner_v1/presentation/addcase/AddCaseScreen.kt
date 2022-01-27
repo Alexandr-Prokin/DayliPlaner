@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.widget.CalendarView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -54,7 +51,8 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
     val navController = rememberNavController()
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
-
+    val errorName = remember { mutableStateOf("${addCaseViewModel.errorNameText}") }
+    val errorDescription = remember { mutableStateOf("${addCaseViewModel.errorDescriptionText}") }
     addCaseViewModel.caseRecordModel.name = name.value
     addCaseViewModel.caseRecordModel.description = description.value
 
@@ -65,7 +63,10 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row() {
-            Button(
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth()
+                    .border(0.dp, Color.Transparent)
+                    .background(color = Color.Transparent),
 
                 onClick = {
                     navController
@@ -74,7 +75,7 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
                         )
                 }
             ) {
-                Text(text = "Back")
+                Text(text = "<- BACK", color = Color.Black)
             }
         }
 
@@ -84,13 +85,13 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
             value = name.value,
             onValueChange = { name.value = it },
             placeHolder = "Enter name",
-            error = "Is not empty"
+            error = errorName.value
         )
         AppTextField(
             value = description.value,
             onValueChange = { description.value = it },
             placeHolder = "Enter description",
-            error = "Is not empty"
+            error = errorDescription.value
         )
         Row {
             // start time
@@ -102,7 +103,14 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel) {
         Spacer(modifier = Modifier.size(10.dp))
         Button(
             onClick = {
-                if (addCaseViewModel.saveCase()) {
+                if (!addCaseViewModel.saveCase()) {
+                    if (name.value.isEmpty()) {
+                        errorName.value = "Is not empty"
+                    }
+                    if (name.value.isEmpty()) {
+                        errorDescription.value = "Is not empty"
+                    }
+                } else {
                     navController.navigate("calendarFragment")
                 }
             }

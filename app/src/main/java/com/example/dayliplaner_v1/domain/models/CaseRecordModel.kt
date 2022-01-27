@@ -4,6 +4,6 @@ data class CaseRecordModel(
     // var id: Int,
     var dateStart: DateTime,
     var dateFinish: DateTime,
-    var name: String,
-    var description: String
+    var name: String?,
+    var description: String?
 )

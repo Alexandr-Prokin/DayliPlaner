@@ -36,8 +36,8 @@ class AppRepositoryImp() : AppRepository {
         return try {
             var caseRecord = realm.createObject(CaseRecord::class.java)
             caseRecord.setId(count + 1)
-            caseRecord.setName(caseRecordModel.name)
-            caseRecord.setDescription(caseRecordModel.description)
+            caseRecordModel.name?.let { caseRecord.setName(it) }
+            caseRecordModel.description?.let { caseRecord.setDescription(it) }
             caseRecord.setDateStart(convertTime.setTimeStamp(caseRecordModel.dateStart))
             caseRecord.setDateFinish(convertTime.setTimeStamp(caseRecordModel.dateFinish))
 
