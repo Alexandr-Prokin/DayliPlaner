@@ -32,23 +32,13 @@ class AddCaseViewModel : ViewModel() {
     }
 
     fun saveCase(): Boolean {
-        return if (caseRecordModel.dateStart.day == null &&
-            caseRecordModel.name == null &&
-            caseRecordModel.description == null
+        return if (caseRecordModel.dateStart.day != null &&
+            caseRecordModel.name != "" &&
+            caseRecordModel.description != ""
         ) {
             saveCaseUseCase.execute(caseRecordModel)
         } else {
             errorDay = caseRecordModel.dateStart.day == null
-            errorNameText = if (caseRecordModel.name == null) {
-                errorText
-            } else {
-                ""
-            }
-            errorDescriptionText = if (caseRecordModel.description == null) {
-                errorText
-            } else {
-                ""
-            }
             false
         }
     }
