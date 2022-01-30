@@ -10,11 +10,7 @@ class AddCaseViewModel : ViewModel() {
     private val appRepository = AppRepositoryImp()
     private val saveCaseUseCase = SaveCaseUseCase(appRepository)
     var errorDay = false
-    var errorName = false
-    var errorDescription = false
-    var errorNameText = ""
-    var errorDescriptionText = ""
-    private val errorText = "Is not empty"
+
     val caseRecordModel: CaseRecordModel = CaseRecordModel(
         DateTime(null, null, null, null, null),
         DateTime(null, null, null, null, null),

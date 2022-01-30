@@ -1,8 +1,8 @@
 package com.example.dayliplaner_v1.presentation.addcase
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.CalendarView
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,7 +13,11 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,34 +26,25 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
 
 class AddCaseScreen : ComponentActivity() {
-    var addCaseViewModel = AddCaseViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             DayliPlaner_v1Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    MainScreen(addCaseViewModel, this)
+                    MainScreen()
                 }
             }
         }
     }
 }
+
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
-    AndroidView(
-        { CalendarView(it) },
-        Modifier.fillMaxWidth(),
-        update = { view ->
-            view.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                addCaseViewModel.setDay(year, month + 1, dayOfMonth)
-            }
-        }
-    )
-}
-@Composable
-fun MainScreen(addCaseViewModel: AddCaseViewModel, context: Context) {
+fun MainScreen() {
+    val context = LocalContext.current
+    var addCaseViewModel = AddCaseViewModel()
     val navController = rememberNavController()
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
@@ -67,7 +62,8 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel, context: Context) {
     ) {
         Row() {
             OutlinedButton(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .border(0.dp, Color.Transparent)
                     .background(color = Color.Transparent),
 
@@ -130,7 +126,20 @@ fun MainScreen(addCaseViewModel: AddCaseViewModel, context: Context) {
         }
     }
 }
-
+@Composable
+fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
+    AndroidView(
+        {
+            CalendarView(it)
+        },
+        Modifier.fillMaxWidth(),
+        update = { view ->
+            view.setOnDateChangeListener { _, year, month, dayOfMonth ->
+                addCaseViewModel.setDay(year, month + 1, dayOfMonth)
+            }
+        }
+    )
+}
 @Composable
 fun AppTextField(
     value: String,
@@ -163,12 +172,129 @@ fun AppTextField(
         )
     }
 }
-
-//
-@Preview(showSystemUi = true, name = "AddCaseScreen")
 @Composable
-fun DefaultPreview() {
-    val addCaseViewModel = AddCaseViewModel()
+fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
 
-    // MainScreen(addCaseViewModel, context = Context)
+    var startHour by remember { mutableStateOf(0) }
+    var startMinute by remember { mutableStateOf(0) }
+    addCaseViewModel.caseRecordModel.dateStart.hours = startHour
+    addCaseViewModel.caseRecordModel.dateStart.minute = startMinute
+    var visible by remember { mutableStateOf(false) }
+
+    Column() {
+        Row() {
+            OutlinedTextField(
+                value = "$startHour:$startMinute", onValueChange = {},
+                textStyle = TextStyle(textAlign = TextAlign.Center),
+                shape = CircleShape,
+                modifier = Modifier
+                    .border(0.dp, Color.Transparent)
+                    .background(Color.Transparent)
+                    .size(130.dp, 50.dp)
+                    .onFocusChanged { focusState ->
+                        if (visible != focusState.isFocused) {
+                            visible = true
+                        }
+                        if (!focusState.isFocused) {
+                            visible = false
+                        }
+                    }
+            )
+        }
+        if (visible) {
+            Row() {
+                AndroidView(
+                    modifier = Modifier.wrapContentSize(),
+                    factory = { context ->
+                        NumberPicker(context).apply {
+                            setOnValueChangedListener { numberPicker, i, i2 ->
+                                startHour = i2
+                            }
+                            minValue = 0
+                            maxValue = 23
+                        }
+                    }
+                )
+                AndroidView(
+                    modifier = Modifier.wrapContentSize(),
+                    factory = { context ->
+                        NumberPicker(context).apply {
+                            setOnValueChangedListener { numberPicker, i, i2 ->
+                                startMinute = i2
+                            }
+                            minValue = 0
+                            maxValue = 59
+                        }
+                    }
+                )
+            }
+        }
+    }
 }
+
+@Composable
+fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
+
+    var finishHour by remember { mutableStateOf(0) }
+    var finishMinute by remember { mutableStateOf(0) }
+    addCaseViewModel.caseRecordModel.dateFinish.hours = finishHour
+    addCaseViewModel.caseRecordModel.dateFinish.minute = finishHour
+    var visible by remember { mutableStateOf(false) }
+
+    Column() {
+        Row() {
+            OutlinedTextField(
+                value = "$finishHour:$finishMinute", onValueChange = {},
+                textStyle = TextStyle(textAlign = TextAlign.Center),
+                shape = CircleShape,
+                modifier = Modifier
+                    .border(0.dp, Color.Transparent)
+                    .background(Color.Transparent)
+                    .size(130.dp, 50.dp)
+                    .onFocusChanged { focusState ->
+                        if (visible != focusState.isFocused) {
+                            visible = true
+                        }
+                        if (!focusState.isFocused) {
+                            visible = false
+                        }
+                    }
+            )
+        }
+        if (visible) {
+            Row() {
+                AndroidView(
+                    modifier = Modifier.wrapContentSize(),
+                    factory = { context ->
+                        NumberPicker(context).apply {
+                            setOnValueChangedListener { numberPicker, i, i2 ->
+                                finishHour = i2
+                            }
+                            minValue = 0
+                            maxValue = 23
+                        }
+                    }
+                )
+                AndroidView(
+                    modifier = Modifier.wrapContentSize(),
+                    factory = { context ->
+                        NumberPicker(context).apply {
+                            setOnValueChangedListener { numberPicker, i, i2 ->
+                                finishMinute = i2
+                            }
+                            minValue = 0
+                            maxValue = 59
+                        }
+                    }
+                )
+            }
+        }
+    }
+}
+//
+//@Preview(showSystemUi = true, name = "AddCaseScreen")
+//@Composable
+//fun DefaultPreview() {
+//
+//    MainScreen()
+//}
