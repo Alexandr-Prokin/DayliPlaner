@@ -15,7 +15,7 @@ class CaseRecordViewHolder(private val binding: ItemCaseRecordBinding) : Recycle
     ) = with(binding) {
         textViewDataStart.text = getTime.getTime(day.getDateStart())
         textViewDataFinish.text = getTime.getTime(day.getDateFinish())
-        textViewNameCase.text = day.getDescription()
+        textViewNameCase.text = day.getName()
         root.setOnClickListener {
             clickListener(day.getId())
         }

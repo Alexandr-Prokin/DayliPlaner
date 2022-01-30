@@ -102,6 +102,8 @@ fun MainScreen() {
         Spacer(modifier = Modifier.size(10.dp))
         Button(
             onClick = {
+                //свернуть дата пикер
+
                 if (addCaseViewModel.saveCase()) {
                     navController.navigate("calendarFragment")
                 } else {
