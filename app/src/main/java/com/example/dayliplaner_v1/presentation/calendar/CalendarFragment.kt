@@ -27,7 +27,7 @@ class CalendarFragment : Fragment() {
             this.findNavController().navigate(R.id.caseDescriptionFragment, bundle)
         }
         binding.recyclerViewCalendar.adapter = adapter
-        binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             adapter.submitList(viewModel.getData(), year, month, dayOfMonth)
         }
         binding.addButton.setOnClickListener {

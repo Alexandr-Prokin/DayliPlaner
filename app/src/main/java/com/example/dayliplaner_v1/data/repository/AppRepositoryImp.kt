@@ -8,7 +8,7 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.exceptions.RealmException
 
-class AppRepositoryImp() : AppRepository {
+class AppRepositoryImp : AppRepository {
     private var convertTime = ConvertTimeStampUseCase()
 
     private var realm: Realm = Realm.getDefaultInstance()
