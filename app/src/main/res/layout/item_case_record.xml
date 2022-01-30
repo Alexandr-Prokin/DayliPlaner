@@ -51,6 +51,6 @@
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toEndOf="@+id/textViewDataFinish"
             app:layout_constraintTop_toTopOf="@+id/textViewDataFinish"
-            tools:text="Description" />
+            tools:text="Name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

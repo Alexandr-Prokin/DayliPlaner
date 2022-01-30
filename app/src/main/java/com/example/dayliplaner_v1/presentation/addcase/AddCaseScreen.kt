@@ -60,7 +60,7 @@ fun MainScreen() {
             .verticalScroll(ScrollState(2), enabled = true),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row() {
+        Row {
             OutlinedButton(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -102,7 +102,7 @@ fun MainScreen() {
         Spacer(modifier = Modifier.size(10.dp))
         Button(
             onClick = {
-                //свернуть дата пикер
+                // свернуть дата пикер
 
                 if (addCaseViewModel.saveCase()) {
                     navController.navigate("calendarFragment")
@@ -183,8 +183,8 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
     addCaseViewModel.caseRecordModel.dateStart.minute = startMinute
     var visible by remember { mutableStateOf(false) }
 
-    Column() {
-        Row() {
+    Column {
+        Row {
             OutlinedTextField(
                 value = "$startHour:$startMinute", onValueChange = {},
                 textStyle = TextStyle(textAlign = TextAlign.Center),
@@ -204,12 +204,12 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
             )
         }
         if (visible) {
-            Row() {
+            Row {
                 AndroidView(
                     modifier = Modifier.wrapContentSize(),
                     factory = { context ->
                         NumberPicker(context).apply {
-                            setOnValueChangedListener { numberPicker, i, i2 ->
+                            setOnValueChangedListener { _, _, i2 ->
                                 startHour = i2
                             }
                             minValue = 0
@@ -221,7 +221,7 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
                     modifier = Modifier.wrapContentSize(),
                     factory = { context ->
                         NumberPicker(context).apply {
-                            setOnValueChangedListener { numberPicker, i, i2 ->
+                            setOnValueChangedListener { _, _, i2 ->
                                 startMinute = i2
                             }
                             minValue = 0
@@ -243,8 +243,8 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
     addCaseViewModel.caseRecordModel.dateFinish.minute = finishHour
     var visible by remember { mutableStateOf(false) }
 
-    Column() {
-        Row() {
+    Column {
+        Row {
             OutlinedTextField(
                 value = "$finishHour:$finishMinute", onValueChange = {},
                 textStyle = TextStyle(textAlign = TextAlign.Center),
@@ -264,12 +264,12 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
             )
         }
         if (visible) {
-            Row() {
+            Row {
                 AndroidView(
                     modifier = Modifier.wrapContentSize(),
                     factory = { context ->
                         NumberPicker(context).apply {
-                            setOnValueChangedListener { numberPicker, i, i2 ->
+                            setOnValueChangedListener { _, _, i2 ->
                                 finishHour = i2
                             }
                             minValue = 0
@@ -281,7 +281,7 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
                     modifier = Modifier.wrapContentSize(),
                     factory = { context ->
                         NumberPicker(context).apply {
-                            setOnValueChangedListener { numberPicker, i, i2 ->
+                            setOnValueChangedListener { _, _, i2 ->
                                 finishMinute = i2
                             }
                             minValue = 0
