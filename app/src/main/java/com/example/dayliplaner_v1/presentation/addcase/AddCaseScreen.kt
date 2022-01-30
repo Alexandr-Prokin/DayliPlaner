@@ -292,9 +292,9 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
     }
 }
 //
-//@Preview(showSystemUi = true, name = "AddCaseScreen")
-//@Composable
-//fun DefaultPreview() {
+// @Preview(showSystemUi = true, name = "AddCaseScreen")
+// @Composable
+// fun DefaultPreview() {
 //
 //    MainScreen()
-//}
+// }
