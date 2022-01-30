@@ -34,17 +34,16 @@ class AppRepositoryImp() : AppRepository {
             count++
         }
         return try {
-            var caseRecord = realm.createObject(CaseRecord::class.java)
+            val caseRecord = realm.createObject(CaseRecord::class.java)
             caseRecord.setId(count + 1)
             caseRecordModel.name?.let { caseRecord.setName(it) }
             caseRecordModel.description?.let { caseRecord.setDescription(it) }
-            caseRecord.setDateStart(convertTime.setTimeStamp(caseRecordModel.dateStart))
-            caseRecord.setDateFinish(convertTime.setTimeStamp(caseRecordModel.dateFinish))
+            caseRecord.setDateStart(convertTime.getTimeStamp(caseRecordModel.dateStart))
+            caseRecord.setDateFinish(convertTime.getTimeStamp(caseRecordModel.dateFinish))
 
             realm.commitTransaction()
             return true
         } catch (e: RealmException) {
-            // Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
             false
         }
     }
