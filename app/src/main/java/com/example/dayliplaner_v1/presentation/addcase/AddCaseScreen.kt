@@ -100,7 +100,10 @@ fun MainScreen() {
             PickerFinishTime(addCaseViewModel)
         }
         Spacer(modifier = Modifier.size(10.dp))
-        Button(
+        OutlinedButton(
+            modifier = Modifier
+                .padding(6.dp),
+            shape = CircleShape,
             onClick = {
                 // свернуть дата пикер
 
@@ -124,7 +127,7 @@ fun MainScreen() {
             }
 
         ) {
-            Text(text = "Save")
+            Text(text = "SAVE")
         }
     }
 }

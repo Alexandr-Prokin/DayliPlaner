@@ -8,5 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="floating_action_button">#673AB7</color>
-
+    <color name="save_button_color">#349400</color>
 </resources>
