@@ -242,9 +242,9 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
 
     var finishHour by remember { mutableStateOf(0) }
     var finishMinute by remember { mutableStateOf(0) }
+    var visible by remember { mutableStateOf(false) }
     addCaseViewModel.finish.hours = finishHour
     addCaseViewModel.finish.minutes = finishHour
-    var visible by remember { mutableStateOf(false) }
 
     Column {
         Row {

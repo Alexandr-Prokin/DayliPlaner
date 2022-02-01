@@ -13,12 +13,12 @@ class SaveCaseUseCaseTest {
     private val appRepository = mock<AppRepository>()
 
     @Test
-    fun execute() {
+    fun `saving in the database`() {
         val testCaseRecord = CaseRecordModel(
             name = "name",
             description = "description",
-            dateStart = DateTime(1, 2, 2022, 1, 1),
-            dateFinish = DateTime(1, 2, 2022, 2, 1)
+            dateStart = 1643017408,
+            dateFinish = 1643017450
         )
 
         Mockito.`when`(appRepository.saveCaseRecord(caseRecordModel = testCaseRecord)).thenReturn(true)
