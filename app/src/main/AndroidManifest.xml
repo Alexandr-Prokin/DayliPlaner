@@ -3,7 +3,7 @@
     package="com.example.dayliplaner_v1">
 
     <application
-        android:name=".data.RealmApp"
+        android:name=".RealmApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

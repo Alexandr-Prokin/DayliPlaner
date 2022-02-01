@@ -6,6 +6,6 @@ import io.realm.RealmResults
 
 class GetDataUseCase(private val appRepository: AppRepository) {
     fun get(): RealmResults<CaseRecord> {
-        return appRepository.getData()
+        return appRepository.getListCaseRecord()
     }
 }

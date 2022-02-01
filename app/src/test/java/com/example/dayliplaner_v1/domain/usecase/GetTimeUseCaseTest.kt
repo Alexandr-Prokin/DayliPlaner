@@ -6,7 +6,7 @@ import org.junit.Test
 class GetTimeUseCaseTest {
 
     @Test
-    fun getTime() {
+    fun `getTime`() {
         val testTimeStamp = "1643544000"
         val useCase = GetTimeUseCase()
         val actual = useCase.getTime(testTimeStamp)

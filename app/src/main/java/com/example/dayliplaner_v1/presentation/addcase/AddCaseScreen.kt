@@ -44,7 +44,7 @@ class AddCaseScreen : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
-    var addCaseViewModel = AddCaseViewModel()
+    val addCaseViewModel = AddCaseViewModel()
     val navController = rememberNavController()
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
@@ -182,8 +182,8 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
 
     var startHour by remember { mutableStateOf(0) }
     var startMinute by remember { mutableStateOf(0) }
-    addCaseViewModel.caseRecordModel.dateStart.hours = startHour
-    addCaseViewModel.caseRecordModel.dateStart.minute = startMinute
+    addCaseViewModel.start.hours = startHour
+    addCaseViewModel.start.minutes = startMinute
     var visible by remember { mutableStateOf(false) }
 
     Column {
@@ -242,8 +242,8 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
 
     var finishHour by remember { mutableStateOf(0) }
     var finishMinute by remember { mutableStateOf(0) }
-    addCaseViewModel.caseRecordModel.dateFinish.hours = finishHour
-    addCaseViewModel.caseRecordModel.dateFinish.minute = finishHour
+    addCaseViewModel.finish.hours = finishHour
+    addCaseViewModel.finish.minutes = finishHour
     var visible by remember { mutableStateOf(false) }
 
     Column {

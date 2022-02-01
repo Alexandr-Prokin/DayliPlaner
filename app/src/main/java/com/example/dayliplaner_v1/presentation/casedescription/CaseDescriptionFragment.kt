@@ -27,7 +27,6 @@ class CaseDescriptionFragment : Fragment() {
         binding.materialButton.setOnClickListener {
             this.findNavController().popBackStack()
         }
-
         return binding.root
     }
 }

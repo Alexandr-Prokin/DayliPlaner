@@ -3,10 +3,10 @@ package com.example.dayliplaner_v1.data.models
 import io.realm.RealmObject
 
 open class CaseRecord : RealmObject() {
-
+    // TODO: АВТОИНКРЕМЕНТ
     private var id: Int = 0
-    private var dateStart: String = ""
-    private var dateFinish: String = ""
+    private var dateStart: Long = 0
+    private var dateFinish: Long = 0
     private var name: String = ""
     private var description: String = ""
 
@@ -16,16 +16,16 @@ open class CaseRecord : RealmObject() {
     fun getId(): Int {
         return id
     }
-    fun setDateStart(dateStart: String) {
+    fun setDateStart(dateStart: Long) {
         this.dateStart = dateStart
     }
-    fun getDateStart(): String {
+    fun getDateStart(): Long {
         return dateStart
     }
-    fun setDateFinish(dateFinish: String) {
+    fun setDateFinish(dateFinish: Long) {
         this.dateFinish = dateFinish
     }
-    fun getDateFinish(): String {
+    fun getDateFinish(): Long {
         return dateFinish
     }
     fun setName(name: String) {

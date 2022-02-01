@@ -1,11 +1,10 @@
-package com.example.dayliplaner_v1.data
+package com.example.dayliplaner_v1
 
 import android.app.Application
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
 class RealmApp : Application() {
-
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
