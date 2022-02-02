@@ -1,9 +1,8 @@
 package com.example.dayliplaner_v1.domain.usecase
 
 import com.example.dayliplaner_v1.domain.models.CaseRecordModel
-import com.example.dayliplaner_v1.domain.models.DateTime
 import com.example.dayliplaner_v1.domain.repository.AppRepository
-import junit.framework.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.kotlin.mock
@@ -26,6 +25,6 @@ class SaveCaseUseCaseTest {
         val actual = useCase.execute(caseRecordModel = testCaseRecord)
         val expected = true
 
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
     }
 }

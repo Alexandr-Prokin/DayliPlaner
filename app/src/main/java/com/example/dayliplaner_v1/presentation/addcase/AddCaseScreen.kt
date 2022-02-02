@@ -13,22 +13,21 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.compose.rememberNavController
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
+import io.realm.Realm
 
 class AddCaseScreen : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Realm.init(this)
         setContent {
             DayliPlaner_v1Theme {
                 // A surface container using the 'background' color from the theme
@@ -40,7 +39,6 @@ class AddCaseScreen : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainScreen() {
 
@@ -284,10 +282,3 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
         }
     }
 }
-//
-// @Preview(showSystemUi = true, name = "AddCaseScreen")
-// @Composable
-// fun DefaultPreview() {
-//
-//    MainScreen()
-// }
