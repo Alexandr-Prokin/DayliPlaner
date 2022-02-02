@@ -6,7 +6,7 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.exceptions.RealmException
 
-class CaseRecordRepositoryImpl : AppRepository {
+class CaseRecordRepositoryImpl : CaseRecordRepository {
 
     private val realm: Realm = Realm.getDefaultInstance()
 

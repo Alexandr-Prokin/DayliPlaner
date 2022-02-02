@@ -14,9 +14,6 @@
             android:id="@+id/action_calendarFragment_to_caseDescriptionFragment"
             app:destination="@+id/caseDescriptionFragment"/>
         <action
-            android:id="@+id/action_calendarFragment_to_addCaseFragment"
-            app:destination="@id/addCaseFragment"/>
-        <action
             android:id="@+id/action_calendarFragment_to_addCaseScreen"
             app:destination="@id/addCaseScreen" />
     </fragment>
@@ -28,12 +25,6 @@
         tools:layout="@layout/fragment_case_description">
     </fragment>
 
-    <fragment
-        android:id="@+id/addCaseFragment"
-        android:name="com.example.dayliplaner_v1.presentation.addcase.AddCaseFragment"
-        android:label="fragment_add_case"
-        tools:layout="@layout/fragment_add_case">
-    </fragment>
     <activity
         android:id="@+id/addCaseScreen"
         android:name="com.example.dayliplaner_v1.presentation.addcase.AddCaseScreen"

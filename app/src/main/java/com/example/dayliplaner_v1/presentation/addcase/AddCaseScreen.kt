@@ -9,11 +9,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -65,12 +67,9 @@ fun MainScreen() {
                     .fillMaxWidth()
                     .border(0.dp, Color.Transparent)
                     .background(color = Color.Transparent),
-
                 onClick = {
                     navController
-                        .navigate(
-                            "calendarFragment"
-                        )
+                        .navigate("calendarFragment")
                 }
             ) {
                 Text(text = "<- BACK", color = Color.Black)
@@ -105,6 +104,7 @@ fun MainScreen() {
             shape = CircleShape,
             onClick = {
                 if (addCaseViewModel.saveCase()) {
+                    Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
                     navController.navigate("calendarFragment")
                 } else {
                     if (addCaseViewModel.errorDay) {
@@ -149,7 +149,7 @@ fun AppTextField(
     placeHolder: String,
     error: String
 ) {
-    Column {
+    Column(modifier = Modifier.padding(horizontal = 30.dp)) {
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
@@ -157,7 +157,7 @@ fun AppTextField(
                 .padding(top = 7.dp)
                 .border(0.dp, Color.Transparent)
                 .background(Color.White, CircleShape),
-            shape = CircleShape,
+            shape = RoundedCornerShape(3.dp),
             placeholder = { Text(placeHolder) },
             colors = TextFieldDefaults.textFieldColors(
                 unfocusedIndicatorColor = Color.Transparent,
@@ -241,7 +241,7 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
     Column {
         Row(Modifier.padding(horizontal = 8.dp)) {
             Text(
-                "Start time:", textAlign = TextAlign.Center,
+                "Finish time:", textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(vertical = 6.dp, horizontal = 3.dp)
             )

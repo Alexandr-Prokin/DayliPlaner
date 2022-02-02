@@ -1,13 +1,10 @@
 package com.example.dayliplaner_v1.domain.usecase
 
 import com.example.dayliplaner_v1.data.models.CaseRecord
-import com.example.dayliplaner_v1.domain.repository.AppRepository
+import com.example.dayliplaner_v1.domain.repository.CaseRecordRepository
 
-class GetListUseCase(private val appRepository: AppRepository) {
-
-
-
+class GetListUseCase(private val caseRecordRepository: CaseRecordRepository) {
     fun getCaseRecord(id: Int): CaseRecord? {
-        return appRepository.getCaseRecord(id)
+        return caseRecordRepository.getCaseRecord(id)
     }
 }

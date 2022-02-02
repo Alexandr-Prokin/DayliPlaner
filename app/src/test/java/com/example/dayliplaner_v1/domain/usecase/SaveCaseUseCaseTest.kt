@@ -1,7 +1,7 @@
 package com.example.dayliplaner_v1.domain.usecase
 
 import com.example.dayliplaner_v1.domain.models.CaseRecordModel
-import com.example.dayliplaner_v1.domain.repository.AppRepository
+import com.example.dayliplaner_v1.domain.repository.CaseRecordRepository
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
@@ -9,7 +9,7 @@ import org.mockito.kotlin.mock
 
 class SaveCaseUseCaseTest {
 
-    private val appRepository = mock<AppRepository>()
+    private val caseRecordRepository = mock<CaseRecordRepository>()
 
     @Test
     fun `saving in the database`() {
@@ -20,8 +20,8 @@ class SaveCaseUseCaseTest {
             dateFinish = 1643017450
         )
 
-        Mockito.`when`(appRepository.saveCaseRecord(caseRecordModel = testCaseRecord)).thenReturn(true)
-        val useCase = SaveCaseUseCase(appRepository = appRepository)
+        Mockito.`when`(caseRecordRepository.saveCaseRecord(caseRecordModel = testCaseRecord)).thenReturn(true)
+        val useCase = SaveCaseUseCase(caseRecordRepository = caseRecordRepository)
         val actual = useCase.execute(caseRecordModel = testCaseRecord)
         val expected = true
 
