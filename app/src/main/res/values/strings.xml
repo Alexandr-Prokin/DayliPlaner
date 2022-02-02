@@ -2,11 +2,18 @@
     <string name="app_name">dayliPlaner_v1</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Name</string>
-    <string name="descriprion">Descriprion</string>
+    <string name="description">Description</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
     <string name="save">Save</string>
     <string name="title_add_case_screen">AddCaseScreen</string>
     <string name="dash">—</string>
     <string name="back"><![CDATA[<- back]]></string>
+    <string name="place_holder_enter_description">Enter description</string>
+    <string name="place_holder_enter_name">Enter name</string>
+    <string name="save_button">SAVE</string>
+    <string name="start_time_add_case_screen">Start time:</string>
+    <string name="finish_time_add_case_screen">Finish time:</string>
+    <string name="select_a_date">select a date</string>
+    <string name="is_not_empty">Is not empty</string>
 </resources>

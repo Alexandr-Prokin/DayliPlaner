@@ -15,13 +15,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.compose.rememberNavController
+import com.example.dayliplaner_v1.R
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
 import io.realm.Realm
 
@@ -35,6 +36,7 @@ class AddCaseScreen : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     MainScreen()
+
                 }
             }
         }
@@ -44,6 +46,9 @@ class AddCaseScreen : ComponentActivity() {
 @Composable
 fun MainScreen() {
 
+    val ERROR_SELECT_A_DATE = stringResource(R.string.select_a_date)
+    val ERROR_IS_NOT_EMPTY = stringResource(R.string.is_not_empty)
+    val ERROR_EMPTY = ""
     val context = LocalContext.current
     val addCaseViewModel = AddCaseViewModel()
     val navController = rememberNavController()
@@ -72,7 +77,7 @@ fun MainScreen() {
                         .navigate("calendarFragment")
                 }
             ) {
-                Text(text = "<- BACK", color = Color.Black)
+                Text(text = stringResource(R.string.back), color = Color.Black)
             }
         }
 
@@ -81,13 +86,15 @@ fun MainScreen() {
         AppTextField(
             value = name.value,
             onValueChange = { name.value = it },
-            placeHolder = "Enter name",
+            placeHolder = stringResource(R.string.place_holder_enter_name),
+            label = stringResource(R.string.place_holder_enter_name),
             error = errorName.value
         )
         AppTextField(
             value = description.value,
             onValueChange = { description.value = it },
-            placeHolder = "Enter description",
+            placeHolder = stringResource(R.string.place_holder_enter_description),
+            label = stringResource(R.string.place_holder_enter_description),
             error = errorDescription.value
         )
         Row {
@@ -108,23 +115,23 @@ fun MainScreen() {
                     navController.navigate("calendarFragment")
                 } else {
                     if (addCaseViewModel.errorDay) {
-                        Toast.makeText(context, "select a date", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, ERROR_SELECT_A_DATE, Toast.LENGTH_SHORT).show()
                     }
                     if (name.value.isEmpty()) {
-                        errorName.value = "is not empty"
+                        errorName.value = ERROR_IS_NOT_EMPTY
                     } else {
-                        errorName.value = ""
+                        errorName.value = ERROR_EMPTY
                     }
                     if (description.value.isEmpty()) {
-                        errorDescription.value = "is not empty"
+                        errorDescription.value = ERROR_IS_NOT_EMPTY
                     } else {
-                        errorDescription.value = ""
+                        errorDescription.value = ERROR_EMPTY
                     }
                 }
             }
 
         ) {
-            Text(text = "SAVE")
+            Text(text = stringResource(R.string.save_button))
         }
     }
 }
@@ -147,6 +154,7 @@ fun AppTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeHolder: String,
+    label: String,
     error: String
 ) {
     Column(modifier = Modifier.padding(horizontal = 30.dp)) {
@@ -159,6 +167,7 @@ fun AppTextField(
                 .background(Color.White, CircleShape),
             shape = RoundedCornerShape(3.dp),
             placeholder = { Text(placeHolder) },
+            label = { Text(label) },
             colors = TextFieldDefaults.textFieldColors(
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent
@@ -186,7 +195,8 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
     Column {
         Row(Modifier.padding(horizontal = 8.dp)) {
             Text(
-                "Start time:", textAlign = TextAlign.Center,
+                stringResource(R.string.start_time_add_case_screen),
+                textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(vertical = 6.dp, horizontal = 3.dp)
             )
@@ -194,7 +204,7 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
             Text(
                 text = "$startHour:$startMinute",
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 3.dp)
+                    .padding(vertical = 6.dp, horizontal = 3.dp)
                     .background(Color.Transparent),
                 textAlign = TextAlign.Center
             )
@@ -241,14 +251,14 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
     Column {
         Row(Modifier.padding(horizontal = 8.dp)) {
             Text(
-                "Finish time:", textAlign = TextAlign.Center,
+                stringResource(R.string.finish_time_add_case_screen), textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(vertical = 6.dp, horizontal = 3.dp)
             )
             Text(
                 text = "$finishHour:$finishMinute",
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 3.dp)
+                    .padding(vertical = 6.dp, horizontal = 3.dp)
                     .background(Color.Transparent),
                 textAlign = TextAlign.Center
             )
