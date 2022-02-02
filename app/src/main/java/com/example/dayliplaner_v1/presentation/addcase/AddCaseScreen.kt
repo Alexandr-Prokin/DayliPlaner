@@ -133,8 +133,7 @@ fun MainScreen() {
 }
 @Composable
 fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
-    AndroidView(
-        {
+    AndroidView( {
             CalendarView(it)
         },
         Modifier.fillMaxWidth(),
@@ -187,26 +186,18 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
     var visible by remember { mutableStateOf(false) }
 
     Column {
-        Row {
-            OutlinedTextField(
-                value = "$startHour:$startMinute", onValueChange = {},
-                textStyle = TextStyle(textAlign = TextAlign.Center),
-                shape = CircleShape,
+        Row(Modifier.padding(horizontal = 9.dp)) {
+            Text("Start time:",textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .border(0.dp, Color.Transparent)
-                    .background(Color.Transparent)
-                    .size(130.dp, 50.dp)
-                    .onFocusChanged { focusState ->
-                        if (visible != focusState.isFocused) {
-                            visible = true
-                        }
-                        if (!focusState.isFocused) {
-                            visible = false
-                        }
-                    }
-            )
+                    .padding(vertical = 8.dp, horizontal = 3.dp))
+
+            Text(text ="$startHour:$startMinute",
+                modifier = Modifier
+                    .padding(vertical = 8.dp, horizontal = 3.dp)
+                    .background(Color.Transparent),
+                textAlign = TextAlign.Center)
         }
-        if (visible) {
+
             Row {
                 AndroidView(
                     modifier = Modifier.wrapContentSize(),
@@ -233,7 +224,7 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
                     }
                 )
             }
-        }
+
     }
 }
 
@@ -247,52 +238,47 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
     addCaseViewModel.finish.minutes = finishHour
 
     Column {
-        Row {
-            OutlinedTextField(
-                value = "$finishHour:$finishMinute", onValueChange = {},
-                textStyle = TextStyle(textAlign = TextAlign.Center),
-                shape = CircleShape,
+        Row(Modifier.padding(horizontal = 9.dp)) {
+            Text(
+                "Start time:", textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .border(0.dp, Color.Transparent)
-                    .background(Color.Transparent)
-                    .size(130.dp, 50.dp)
-                    .onFocusChanged { focusState ->
-                        if (visible != focusState.isFocused) {
-                            visible = true
-                        }
-                        if (!focusState.isFocused) {
-                            visible = false
-                        }
-                    }
+                    .padding(vertical = 8.dp, horizontal = 3.dp)
+            )
+
+            Text(
+                text = "$finishHour:$finishMinute",
+                modifier = Modifier
+                    .padding(vertical = 8.dp, horizontal = 3.dp)
+                    .background(Color.Transparent),
+                textAlign = TextAlign.Center
             )
         }
-        if (visible) {
-            Row {
-                AndroidView(
-                    modifier = Modifier.wrapContentSize(),
-                    factory = { context ->
-                        NumberPicker(context).apply {
-                            setOnValueChangedListener { _, _, i2 ->
-                                finishHour = i2
-                            }
-                            minValue = 0
-                            maxValue = 23
+
+        Row {
+            AndroidView(
+                modifier = Modifier.wrapContentSize(),
+                factory = { context ->
+                    NumberPicker(context).apply {
+                        setOnValueChangedListener { _, _, i2 ->
+                            finishHour = i2
                         }
+                        minValue = 0
+                        maxValue = 23
                     }
-                )
-                AndroidView(
-                    modifier = Modifier.wrapContentSize(),
-                    factory = { context ->
-                        NumberPicker(context).apply {
-                            setOnValueChangedListener { _, _, i2 ->
-                                finishMinute = i2
-                            }
-                            minValue = 0
-                            maxValue = 59
+                }
+            )
+            AndroidView(
+                modifier = Modifier.wrapContentSize(),
+                factory = { context ->
+                    NumberPicker(context).apply {
+                        setOnValueChangedListener { _, _, i2 ->
+                            finishMinute = i2
                         }
+                        minValue = 0
+                        maxValue = 59
                     }
-                )
-            }
+                }
+            )
         }
     }
 }
