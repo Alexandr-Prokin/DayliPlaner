@@ -43,6 +43,7 @@ class AddCaseScreen : ComponentActivity() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainScreen() {
+
     val context = LocalContext.current
     val addCaseViewModel = AddCaseViewModel()
     val navController = rememberNavController()
@@ -105,8 +106,6 @@ fun MainScreen() {
                 .padding(6.dp),
             shape = CircleShape,
             onClick = {
-                // свернуть дата пикер
-
                 if (addCaseViewModel.saveCase()) {
                     navController.navigate("calendarFragment")
                 } else {
@@ -133,7 +132,8 @@ fun MainScreen() {
 }
 @Composable
 fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
-    AndroidView( {
+    AndroidView(
+        {
             CalendarView(it)
         },
         Modifier.fillMaxWidth(),
@@ -181,50 +181,53 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
 
     var startHour by remember { mutableStateOf(0) }
     var startMinute by remember { mutableStateOf(0) }
+
     addCaseViewModel.start.hours = startHour
     addCaseViewModel.start.minutes = startMinute
-    var visible by remember { mutableStateOf(false) }
 
     Column {
-        Row(Modifier.padding(horizontal = 9.dp)) {
-            Text("Start time:",textAlign = TextAlign.Center,
+        Row(Modifier.padding(horizontal = 8.dp)) {
+            Text(
+                "Start time:", textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 3.dp))
+                    .padding(vertical = 6.dp, horizontal = 3.dp)
+            )
 
-            Text(text ="$startHour:$startMinute",
+            Text(
+                text = "$startHour:$startMinute",
                 modifier = Modifier
                     .padding(vertical = 8.dp, horizontal = 3.dp)
                     .background(Color.Transparent),
-                textAlign = TextAlign.Center)
+                textAlign = TextAlign.Center
+            )
         }
 
-            Row {
-                AndroidView(
-                    modifier = Modifier.wrapContentSize(),
-                    factory = { context ->
-                        NumberPicker(context).apply {
-                            setOnValueChangedListener { _, _, i2 ->
-                                startHour = i2
-                            }
-                            minValue = 0
-                            maxValue = 23
+        Row {
+            AndroidView(
+                modifier = Modifier.wrapContentSize(),
+                factory = { context ->
+                    NumberPicker(context).apply {
+                        setOnValueChangedListener { _, _, i2 ->
+                            startHour = i2
                         }
+                        minValue = 0
+                        maxValue = 23
                     }
-                )
-                AndroidView(
-                    modifier = Modifier.wrapContentSize(),
-                    factory = { context ->
-                        NumberPicker(context).apply {
-                            setOnValueChangedListener { _, _, i2 ->
-                                startMinute = i2
-                            }
-                            minValue = 0
-                            maxValue = 59
+                }
+            )
+            AndroidView(
+                modifier = Modifier.wrapContentSize(),
+                factory = { context ->
+                    NumberPicker(context).apply {
+                        setOnValueChangedListener { _, _, i2 ->
+                            startMinute = i2
                         }
+                        minValue = 0
+                        maxValue = 59
                     }
-                )
-            }
-
+                }
+            )
+        }
     }
 }
 
@@ -233,18 +236,17 @@ fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
 
     var finishHour by remember { mutableStateOf(0) }
     var finishMinute by remember { mutableStateOf(0) }
-    var visible by remember { mutableStateOf(false) }
+
     addCaseViewModel.finish.hours = finishHour
     addCaseViewModel.finish.minutes = finishHour
 
     Column {
-        Row(Modifier.padding(horizontal = 9.dp)) {
+        Row(Modifier.padding(horizontal = 8.dp)) {
             Text(
                 "Start time:", textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 3.dp)
+                    .padding(vertical = 6.dp, horizontal = 3.dp)
             )
-
             Text(
                 text = "$finishHour:$finishMinute",
                 modifier = Modifier
