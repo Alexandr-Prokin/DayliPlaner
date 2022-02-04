@@ -28,5 +28,6 @@
     <activity
         android:id="@+id/addCaseScreen"
         android:name="com.example.dayliplaner_v1.presentation.addcase.AddCaseScreen"
-        android:label="AddCaseScreen" />
+        android:label="AddCaseScreen">
+    </activity>
 </navigation>

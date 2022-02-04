@@ -1,5 +1,6 @@
 package com.example.dayliplaner_v1.presentation.addcase
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
 import android.widget.NumberPicker
@@ -23,7 +24,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.compose.rememberNavController
 import com.example.dayliplaner_v1.R
+import com.example.dayliplaner_v1.presentation.MainActivity
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
+import com.example.dayliplaner_v1.presentation.calendar.CalendarFragment
 import io.realm.Realm
 
 class AddCaseScreen : ComponentActivity() {
@@ -73,8 +76,10 @@ fun MainScreen() {
                     .border(0.dp, Color.Transparent)
                     .background(color = Color.Transparent),
                 onClick = {
-                    navController
-                        .navigate("calendarFragment")
+                    context.startActivity(Intent(context, MainActivity::class.java))
+//
+//                    navController
+//                        .navigate("calendarFragment")
                 }
             ) {
                 Text(text = stringResource(R.string.back), color = Color.Black)
@@ -112,7 +117,7 @@ fun MainScreen() {
             onClick = {
                 if (addCaseViewModel.saveCase()) {
                     Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
-                    navController.navigate("calendarFragment")
+                    context.startActivity(Intent(context, MainActivity::class.java))
                 } else {
                     if (addCaseViewModel.errorDay) {
                         Toast.makeText(context, ERROR_SELECT_A_DATE, Toast.LENGTH_SHORT).show()
