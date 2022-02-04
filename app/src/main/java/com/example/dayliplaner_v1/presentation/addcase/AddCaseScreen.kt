@@ -26,7 +26,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dayliplaner_v1.R
 import com.example.dayliplaner_v1.presentation.MainActivity
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
-import com.example.dayliplaner_v1.presentation.calendar.CalendarFragment
 import io.realm.Realm
 
 class AddCaseScreen : ComponentActivity() {
@@ -54,7 +53,6 @@ fun MainScreen() {
     val ERROR_EMPTY = ""
     val context = LocalContext.current
     val addCaseViewModel = AddCaseViewModel()
-    val navController = rememberNavController()
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val errorName = remember { mutableStateOf("") }
@@ -77,9 +75,6 @@ fun MainScreen() {
                     .background(color = Color.Transparent),
                 onClick = {
                     context.startActivity(Intent(context, MainActivity::class.java))
-//
-//                    navController
-//                        .navigate("calendarFragment")
                 }
             ) {
                 Text(text = stringResource(R.string.back), color = Color.Black)
