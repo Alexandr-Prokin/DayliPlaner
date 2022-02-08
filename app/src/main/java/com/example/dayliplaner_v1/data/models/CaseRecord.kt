@@ -3,7 +3,7 @@ package com.example.dayliplaner_v1.data.models
 import io.realm.RealmObject
 
 open class CaseRecord : RealmObject() {
-    // TODO: АВТОИНКРЕМЕНТ
+
     private var id: Int = 0
     private var dateStart: Long = 0
     private var dateFinish: Long = 0

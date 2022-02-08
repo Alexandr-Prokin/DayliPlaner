@@ -16,7 +16,7 @@ class CaseDescriptionViewModel : ViewModel() {
 
     fun getList(id: Int) {
 
-        val caseRecord = getListUseCase.getCaseRecord(id)
+        val caseRecord = getListUseCase.execute(id)
 
         caseDescription = CaseDescription(
             description = caseRecord!!.getDescription(),

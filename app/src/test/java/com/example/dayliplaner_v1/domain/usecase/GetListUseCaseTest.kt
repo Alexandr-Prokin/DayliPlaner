@@ -1,6 +1,5 @@
 package com.example.dayliplaner_v1.domain.usecase
 
-
 import com.example.dayliplaner_v1.data.models.CaseRecord
 import com.example.dayliplaner_v1.domain.repository.CaseRecordRepository
 import org.junit.Assert
@@ -19,7 +18,7 @@ class GetListUseCaseTest {
 
         Mockito.`when`(caseRecordRepository.getCaseRecord(id = testId)).thenReturn(testCaseRecord)
         val useCase =  GetListUseCase(caseRecordRepository = caseRecordRepository)
-        val actual =  useCase.getCaseRecord(id = testId)
+        val actual =  useCase.execute(id = testId)
 
         Assert.assertEquals(testCaseRecord, actual)
     }

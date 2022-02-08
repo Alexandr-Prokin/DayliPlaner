@@ -14,7 +14,7 @@ class AddCaseViewModel : ViewModel() {
     private val dateFormatter = DateFormatter()
     val start: DateTime = DateTime(0, 0, 0, 0, 0)
     val finish: DateTime = DateTime(0, 0, 0, 0, 0)
-    //
+
     var errorDay = false
     val caseRecordModel: CaseRecordModel = CaseRecordModel(
         dateStart = 0,

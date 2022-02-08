@@ -22,11 +22,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.navigation.compose.rememberNavController
 import com.example.dayliplaner_v1.R
 import com.example.dayliplaner_v1.presentation.MainActivity
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
 import io.realm.Realm
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class AddCaseScreen : ComponentActivity() {
 
@@ -48,18 +49,26 @@ class AddCaseScreen : ComponentActivity() {
 @Composable
 fun MainScreen() {
 
-    val ERROR_SELECT_A_DATE = stringResource(R.string.select_a_date)
-    val ERROR_IS_NOT_EMPTY = stringResource(R.string.is_not_empty)
-    val ERROR_EMPTY = ""
     val context = LocalContext.current
     val addCaseViewModel = AddCaseViewModel()
     val name = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val errorName = remember { mutableStateOf("") }
     val errorDescription = remember { mutableStateOf("") }
+    val startHours = remember { mutableStateOf(0) }
+    val startMinutes = remember { mutableStateOf(0) }
+    val finishHours = remember { mutableStateOf(0) }
+    val finishMinutes = remember { mutableStateOf(0) }
 
+    addCaseViewModel.start.hours = startHours.value
+    addCaseViewModel.start.minutes = startMinutes.value
+    addCaseViewModel.finish.hours = finishHours.value
+    addCaseViewModel.finish.minutes = finishMinutes.value
     addCaseViewModel.caseRecordModel.name = name.value
     addCaseViewModel.caseRecordModel.description = description.value
+
+
+
 
     Column(
         modifier = Modifier
@@ -98,11 +107,19 @@ fun MainScreen() {
             error = errorDescription.value
         )
         Row {
-            // start time
-            PickerStartTime(addCaseViewModel)
+            // start time TODO:
+            PickerTime(
+                nameText = stringResource(R.string.start_time_add_case_screen),
+                onValueChangedHours = {startHours.value = it},
+                onValueChangedMinutes = {startMinutes.value = it}
+            )
             Spacer(modifier = Modifier.size(10.dp))
             // end time
-            PickerFinishTime(addCaseViewModel)
+            PickerTime(
+                nameText = stringResource(R.string.finish_time_add_case_screen),
+                onValueChangedHours = {finishHours.value = it},
+                onValueChangedMinutes = {finishMinutes.value = it}
+            )
         }
         Spacer(modifier = Modifier.size(10.dp))
         OutlinedButton(
@@ -111,21 +128,21 @@ fun MainScreen() {
             shape = CircleShape,
             onClick = {
                 if (addCaseViewModel.saveCase()) {
-                    Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.saved, Toast.LENGTH_SHORT).show()
                     context.startActivity(Intent(context, MainActivity::class.java))
                 } else {
                     if (addCaseViewModel.errorDay) {
-                        Toast.makeText(context, ERROR_SELECT_A_DATE, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string.select_a_date, Toast.LENGTH_SHORT).show()
                     }
                     if (name.value.isEmpty()) {
-                        errorName.value = ERROR_IS_NOT_EMPTY
+                        errorName.value =  R.string.is_not_empty.toString()
                     } else {
-                        errorName.value = ERROR_EMPTY
+                        errorName.value = ""
                     }
                     if (description.value.isEmpty()) {
-                        errorDescription.value = ERROR_IS_NOT_EMPTY
+                        errorDescription.value = R.string.is_not_empty.toString()
                     } else {
-                        errorDescription.value = ERROR_EMPTY
+                        errorDescription.value = ""
                     }
                 }
             }
@@ -137,6 +154,7 @@ fun MainScreen() {
 }
 @Composable
 fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
+
     AndroidView(
         {
             CalendarView(it)
@@ -145,6 +163,9 @@ fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
         update = { view ->
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
                 addCaseViewModel.setDay(year, month + 1, dayOfMonth)
+                //TODO:
+//                LocalDate.of(year, month + 1, dayOfMonth)
+//                LocalDateTime.of(year, month, dayOfMonth, 0,0)
             }
         }
     )
@@ -184,25 +205,26 @@ fun AppTextField(
     }
 }
 @Composable
-fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
+fun PickerTime(
+    nameText: String,
+    onValueChangedHours: (Int) -> Unit,
+    onValueChangedMinutes: (Int) -> Unit
+) {
 
-    var startHour by remember { mutableStateOf(0) }
-    var startMinute by remember { mutableStateOf(0) }
-
-    addCaseViewModel.start.hours = startHour
-    addCaseViewModel.start.minutes = startMinute
+    var hours by remember { mutableStateOf(0) }
+    var minutes by remember { mutableStateOf(0) }
 
     Column {
         Row(Modifier.padding(horizontal = 8.dp)) {
             Text(
-                stringResource(R.string.start_time_add_case_screen),
+                "$nameText",
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(vertical = 6.dp, horizontal = 3.dp)
             )
 
             Text(
-                text = "$startHour:$startMinute",
+                text = "$hours:$minutes",
                 modifier = Modifier
                     .padding(vertical = 6.dp, horizontal = 3.dp)
                     .background(Color.Transparent),
@@ -215,9 +237,10 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
                 modifier = Modifier.wrapContentSize(),
                 factory = { context ->
                     NumberPicker(context).apply {
-                        setOnValueChangedListener { _, _, i2 ->
-                            startHour = i2
-                        }
+                        setOnValueChangedListener { _, _, value ->
+                           onValueChangedHours.invoke(value)
+                            hours = value
+                        }//TODO:
                         minValue = 0
                         maxValue = 23
                     }
@@ -227,63 +250,10 @@ fun PickerStartTime(addCaseViewModel: AddCaseViewModel) {
                 modifier = Modifier.wrapContentSize(),
                 factory = { context ->
                     NumberPicker(context).apply {
-                        setOnValueChangedListener { _, _, i2 ->
-                            startMinute = i2
-                        }
-                        minValue = 0
-                        maxValue = 59
-                    }
-                }
-            )
-        }
-    }
-}
-
-@Composable
-fun PickerFinishTime(addCaseViewModel: AddCaseViewModel) {
-
-    var finishHour by remember { mutableStateOf(0) }
-    var finishMinute by remember { mutableStateOf(0) }
-
-    addCaseViewModel.finish.hours = finishHour
-    addCaseViewModel.finish.minutes = finishHour
-
-    Column {
-        Row(Modifier.padding(horizontal = 8.dp)) {
-            Text(
-                stringResource(R.string.finish_time_add_case_screen), textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .padding(vertical = 6.dp, horizontal = 3.dp)
-            )
-            Text(
-                text = "$finishHour:$finishMinute",
-                modifier = Modifier
-                    .padding(vertical = 6.dp, horizontal = 3.dp)
-                    .background(Color.Transparent),
-                textAlign = TextAlign.Center
-            )
-        }
-
-        Row {
-            AndroidView(
-                modifier = Modifier.wrapContentSize(),
-                factory = { context ->
-                    NumberPicker(context).apply {
-                        setOnValueChangedListener { _, _, i2 ->
-                            finishHour = i2
-                        }
-                        minValue = 0
-                        maxValue = 23
-                    }
-                }
-            )
-            AndroidView(
-                modifier = Modifier.wrapContentSize(),
-                factory = { context ->
-                    NumberPicker(context).apply {
-                        setOnValueChangedListener { _, _, i2 ->
-                            finishMinute = i2
-                        }
+                        setOnValueChangedListener { _, _, value ->
+                            onValueChangedMinutes.invoke(value)
+                            minutes = value
+                        }//TODO:
                         minValue = 0
                         maxValue = 59
                     }

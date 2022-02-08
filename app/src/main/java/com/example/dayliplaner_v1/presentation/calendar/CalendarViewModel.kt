@@ -10,7 +10,7 @@ class CalendarViewModel : ViewModel() {
     private val appRepository = CaseRecordRepositoryImpl()
     private val getDataUseCase = GetDataUseCase(appRepository)
 
-    fun getData(): RealmResults<CaseRecord> {
-        return getDataUseCase.get()
+    fun getCaseRecord(): RealmResults<CaseRecord> {
+        return getDataUseCase.execute()
     }
 }

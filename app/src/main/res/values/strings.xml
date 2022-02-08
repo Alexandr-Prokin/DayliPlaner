@@ -16,4 +16,5 @@
     <string name="finish_time_add_case_screen">Finish time:</string>
     <string name="select_a_date">select a date</string>
     <string name="is_not_empty">Is not empty</string>
+    <string name="saved">Saved</string>
 </resources>
