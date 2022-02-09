@@ -132,12 +132,12 @@ fun MainScreen() {
                         Toast.makeText(context, R.string.select_a_date, Toast.LENGTH_SHORT).show()
                     }
                     if (name.value.isEmpty()) {
-                        errorName.value =  R.string.is_not_empty.toString()
+                        errorName.value = "Is not empty"
                     } else {
                         errorName.value = ""
                     }
                     if (description.value.isEmpty()) {
-                        errorDescription.value = R.string.is_not_empty.toString()
+                        errorDescription.value = "Is not empty"
                     } else {
                         errorDescription.value = ""
                     }
@@ -234,8 +234,8 @@ fun PickerTime(
                            onValueChangedHours.invoke(value)
                             hours = value
                         }
-                        minValue =  R.string.start_hours
-                        maxValue = R.string.end_hours
+                        minValue =  0
+                        maxValue = 23
                     }
                 }
             )
@@ -247,8 +247,8 @@ fun PickerTime(
                             onValueChangedMinutes.invoke(value)
                             minutes = value
                         }
-                        minValue = R.string.start_minutes
-                        maxValue = R.string.end_minutes
+                        minValue = 0
+                        maxValue = 59
                     }
                 }
             )

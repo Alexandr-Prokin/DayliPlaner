@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.dayliplaner_v1.R
 import com.example.dayliplaner_v1.databinding.FragmentCalendarBinding
 import com.example.dayliplaner_v1.presentation.caserecord.CaseRecordAdapter
+import java.time.LocalDate
 
 class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
@@ -28,7 +28,7 @@ class CalendarFragment : Fragment() {
         }
         binding.recyclerViewCalendar.adapter = adapter
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            adapter.submitList(viewModel.getCaseRecord(), year, month, dayOfMonth)
+            adapter.submitList(viewModel.getCaseRecord(), LocalDate.of(year, month+1, dayOfMonth))
         }
         binding.addButton.setOnClickListener {
             this.findNavController()
