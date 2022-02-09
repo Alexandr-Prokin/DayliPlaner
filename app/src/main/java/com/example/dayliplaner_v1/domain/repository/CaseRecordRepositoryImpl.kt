@@ -2,6 +2,7 @@ package com.example.dayliplaner_v1.domain.repository
 
 import com.example.dayliplaner_v1.data.models.CaseRecord
 import com.example.dayliplaner_v1.domain.models.CaseRecordModel
+import com.example.dayliplaner_v1.presentation.convertToSecond
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.exceptions.RealmException
@@ -27,8 +28,8 @@ class CaseRecordRepositoryImpl : CaseRecordRepository {
                 setId(getListCaseRecord().size)
                 setName(caseRecordModel.name)
                 setDescription(caseRecordModel.description)
-                setDateStart(caseRecordModel.dateStart)
-                setDateFinish(caseRecordModel.dateFinish)
+                setDateStart(caseRecordModel.dateStart.convertToSecond())
+                setDateFinish(caseRecordModel.dateFinish.convertToSecond())
             }
             commitTransaction()
             true

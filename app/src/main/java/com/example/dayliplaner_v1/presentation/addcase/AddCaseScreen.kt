@@ -2,6 +2,7 @@ package com.example.dayliplaner_v1.presentation.addcase
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.CalendarView
 import android.widget.NumberPicker
 import android.widget.Toast
@@ -25,9 +26,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.example.dayliplaner_v1.R
 import com.example.dayliplaner_v1.presentation.MainActivity
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
+import com.example.dayliplaner_v1.presentation.convertToSecond
 import io.realm.Realm
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 class AddCaseScreen : ComponentActivity() {
 
@@ -59,16 +62,12 @@ fun MainScreen() {
     val startMinutes = remember { mutableStateOf(0) }
     val finishHours = remember { mutableStateOf(0) }
     val finishMinutes = remember { mutableStateOf(0) }
+    val date = remember { mutableStateOf(LocalDate.of(1,1,1)) }
 
-    addCaseViewModel.start.hours = startHours.value
-    addCaseViewModel.start.minutes = startMinutes.value
-    addCaseViewModel.finish.hours = finishHours.value
-    addCaseViewModel.finish.minutes = finishMinutes.value
+    addCaseViewModel.caseRecordModel.dateStart = LocalDateTime.of(date.value, LocalTime.of(startHours.value, startMinutes.value))
+    addCaseViewModel.caseRecordModel.dateFinish = LocalDateTime.of(date.value, LocalTime.of(finishHours.value, finishMinutes.value))
     addCaseViewModel.caseRecordModel.name = name.value
     addCaseViewModel.caseRecordModel.description = description.value
-
-
-
 
     Column(
         modifier = Modifier
@@ -90,7 +89,7 @@ fun MainScreen() {
             }
         }
 
-        MyCalendarView(addCaseViewModel)
+        MyCalendarView(addCaseViewModel, date = {date.value = it})
 
         AppTextField(
             value = name.value,
@@ -153,8 +152,8 @@ fun MainScreen() {
     }
 }
 @Composable
-fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
-
+fun MyCalendarView(addCaseViewModel: AddCaseViewModel, date : (LocalDate) -> Unit) {
+val context = LocalContext.current
     AndroidView(
         {
             CalendarView(it)
@@ -162,10 +161,18 @@ fun MyCalendarView(addCaseViewModel: AddCaseViewModel) {
         Modifier.fillMaxWidth(),
         update = { view ->
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                addCaseViewModel.setDay(year, month + 1, dayOfMonth)
+                //addCaseViewModel.setDay(year, month + 1, dayOfMonth)
                 //TODO:
-//                LocalDate.of(year, month + 1, dayOfMonth)
-//                LocalDateTime.of(year, month, dayOfMonth, 0,0)
+
+                date.invoke(LocalDate.of(year, month+1, dayOfMonth))
+
+
+//                var first = LocalDate.of(year, month+1 , dayOfMonth)
+//
+//                var second = LocalTime.of(1,2)   //(1970, 1, 1, 1,1)
+//                val finishDate = LocalDateTime.of(first, second)
+//                Log.e("Tag", "second=$second")
+//                Log.e("Tag", "date=$finishDate")
             }
         }
     )
