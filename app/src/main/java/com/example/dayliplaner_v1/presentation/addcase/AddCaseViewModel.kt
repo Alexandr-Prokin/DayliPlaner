@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.dayliplaner_v1.domain.models.CaseRecordModel
 import com.example.dayliplaner_v1.domain.repository.CaseRecordRepositoryImpl
 import com.example.dayliplaner_v1.domain.usecase.SaveCaseUseCase
-import java.time.LocalDateTime
 
 class AddCaseViewModel : ViewModel() {
 
