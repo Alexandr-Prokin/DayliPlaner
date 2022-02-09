@@ -17,4 +17,8 @@
     <string name="select_a_date">select a date</string>
     <string name="is_not_empty">Is not empty</string>
     <string name="saved">Saved</string>
+    <string name="start_hours">0</string>
+    <string name="end_hours">23</string>
+    <string name="start_minutes">0</string>
+    <string name="end_minutes">59</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.dayliplaner_v1.presentation.addcase
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.CalendarView
 import android.widget.NumberPicker
 import android.widget.Toast
@@ -26,7 +25,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.example.dayliplaner_v1.R
 import com.example.dayliplaner_v1.presentation.MainActivity
 import com.example.dayliplaner_v1.presentation.addcase.theme.DayliPlaner_v1Theme
-import com.example.dayliplaner_v1.presentation.convertToSecond
 import io.realm.Realm
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -89,7 +87,7 @@ fun MainScreen() {
             }
         }
 
-        MyCalendarView(addCaseViewModel, date = {date.value = it})
+        MyCalendarView(date = {date.value = it})
 
         AppTextField(
             value = name.value,
@@ -106,7 +104,7 @@ fun MainScreen() {
             error = errorDescription.value
         )
         Row {
-            // start time TODO:
+            // start time
             PickerTime(
                 nameText = stringResource(R.string.start_time_add_case_screen),
                 onValueChangedHours = {startHours.value = it},
@@ -152,8 +150,7 @@ fun MainScreen() {
     }
 }
 @Composable
-fun MyCalendarView(addCaseViewModel: AddCaseViewModel, date : (LocalDate) -> Unit) {
-val context = LocalContext.current
+fun MyCalendarView(date : (LocalDate) -> Unit) {
     AndroidView(
         {
             CalendarView(it)
@@ -161,18 +158,7 @@ val context = LocalContext.current
         Modifier.fillMaxWidth(),
         update = { view ->
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                //addCaseViewModel.setDay(year, month + 1, dayOfMonth)
-                //TODO:
-
                 date.invoke(LocalDate.of(year, month+1, dayOfMonth))
-
-
-//                var first = LocalDate.of(year, month+1 , dayOfMonth)
-//
-//                var second = LocalTime.of(1,2)   //(1970, 1, 1, 1,1)
-//                val finishDate = LocalDateTime.of(first, second)
-//                Log.e("Tag", "second=$second")
-//                Log.e("Tag", "date=$finishDate")
             }
         }
     )
@@ -224,7 +210,7 @@ fun PickerTime(
     Column {
         Row(Modifier.padding(horizontal = 8.dp)) {
             Text(
-                "$nameText",
+                nameText,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(vertical = 6.dp, horizontal = 3.dp)
@@ -247,9 +233,9 @@ fun PickerTime(
                         setOnValueChangedListener { _, _, value ->
                            onValueChangedHours.invoke(value)
                             hours = value
-                        }//TODO:
-                        minValue = 0
-                        maxValue = 23
+                        }
+                        minValue =  R.string.start_hours
+                        maxValue = R.string.end_hours
                     }
                 }
             )
@@ -260,9 +246,9 @@ fun PickerTime(
                         setOnValueChangedListener { _, _, value ->
                             onValueChangedMinutes.invoke(value)
                             minutes = value
-                        }//TODO:
-                        minValue = 0
-                        maxValue = 59
+                        }
+                        minValue = R.string.start_minutes
+                        maxValue = R.string.end_minutes
                     }
                 }
             )
