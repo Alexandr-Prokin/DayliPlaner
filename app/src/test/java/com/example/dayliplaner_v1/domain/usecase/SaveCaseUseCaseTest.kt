@@ -6,6 +6,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.kotlin.mock
+import java.time.LocalDateTime
 
 class SaveCaseUseCaseTest {
 
@@ -16,8 +17,8 @@ class SaveCaseUseCaseTest {
         val testCaseRecord = CaseRecordModel(
             name = "name",
             description = "description",
-            dateStart = 1643017408,
-            dateFinish = 1643017450
+            dateStart = LocalDateTime.of(2022, 12, 12, 12 , 12),
+            dateFinish = LocalDateTime.of(2022, 12, 12, 14 , 12)
         )
 
         Mockito.`when`(caseRecordRepository.saveCaseRecord(caseRecordModel = testCaseRecord)).thenReturn(true)
