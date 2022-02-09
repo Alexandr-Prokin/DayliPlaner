@@ -28,8 +28,8 @@ class CaseRecordRepositoryImpl : CaseRecordRepository {
                 setId(getListCaseRecord().size)
                 setName(caseRecordModel.name)
                 setDescription(caseRecordModel.description)
-                setDateStart(caseRecordModel.dateStart.convertToSecond())
-                setDateFinish(caseRecordModel.dateFinish.convertToSecond())
+                setDateStart(caseRecordModel.dateStart!!.convertToSecond())
+                setDateFinish(caseRecordModel.dateFinish!!.convertToSecond())
             }
             commitTransaction()
             true

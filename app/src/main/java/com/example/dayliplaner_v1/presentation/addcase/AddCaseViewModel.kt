@@ -13,21 +13,21 @@ class AddCaseViewModel : ViewModel() {
 
     var errorDay = false
     val caseRecordModel: CaseRecordModel = CaseRecordModel(
-        dateStart = LocalDateTime.of(1,1,1,0,0),
-        dateFinish = LocalDateTime.of(1,1,1,0,0),
+        dateStart = null,
+        dateFinish = null,
         name = "",
         description = ""
     )
 
     fun saveCase(): Boolean {
         return if (
-            caseRecordModel.dateStart != LocalDateTime.of(1,1,1,0,0) &&
+            caseRecordModel.dateStart != null &&
             caseRecordModel.name != "" &&
             caseRecordModel.description != ""
         ) {
             saveCaseUseCase.execute(caseRecordModel)
         } else {
-            errorDay = caseRecordModel.dateStart == LocalDateTime.of(1,1,1,0,0)
+            errorDay = caseRecordModel.dateStart == null
             false
         }
     }
